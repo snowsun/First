@@ -7,6 +7,6 @@
 </head>
 <body>
 <input class="easyui-datebox">
-sssss
+sss
 </body>
 </html>
