@@ -5,13 +5,8 @@
 <title>主界面</title>
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/system/home.css">
-<!-- clock css -->
-<link rel="stylesheet" type="text/css" href="<%=basePath%>jsp/assets/css/style.css">
 <!-- js -->
-<script type="text/javascript" src="<%=basePath%>js/system/main.js"></script>
-<!-- clock js -->
-<script type="text/javascript" src="<%=basePath%>jsp/assets/js/moment.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>jsp/assets/js/script.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/system/home.js"></script>
 <!-- may use js -->
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.panel.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.linkbutton.js"></script>
