@@ -13,7 +13,7 @@
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.parser.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.tabs.js"></script>
 </head>
-<body class="easyui-layout">
+<body class="easyui-layout" onLoad="time()">
     <div data-options="region:'north',split:false" class="cs-north">
     	<center>
     	<div class="title" id="title"></div>
@@ -58,9 +58,10 @@
     <div data-options="region:'center',border:true,split:true" id="tt">
     	<div id="tabs" class="easyui-tabs"  fit="true" border="false">
             <div title="Home">
-				<div >
+				<div>
 					<p style="font-family:'华文行楷';font-size:35px;border-radius:10px;text-align:center;">南京大学化学实验中心选课系统欢迎您！</p>
 				</div>
+				<div id="showtime" style="top:68%;text-align:right;position:relative;"></div>
 			</div>
    		</div>
     </div>
