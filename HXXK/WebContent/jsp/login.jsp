@@ -18,10 +18,10 @@
 			<div class="loginBox" id="box" style="display:none">
 				<img src="../image/login/loginBox.png">
 				<div class="username">
-					<input type="text" placeholder="username" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)"/>
+					<input type="text" id="username" placeholder="username" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)"/>
 				</div>
 				<div class="password">
-					<input type="password" placeholder="password" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)"/>
+					<input type="password" id="password" placeholder="password" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)"/>
 				</div>
 				<div class="login" id="login" style="cursor:hand; background-image:url(../image/none.png)" onClick="log('0')"></div>
 				<div class="back"  id="back"  style="cursor:hand; background-image:url(../image/none.png)" onClick="back()"></div>

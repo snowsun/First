@@ -97,9 +97,32 @@ function back(){
 	});
 }
 
+/*登录系统*/
 function log(str){
-	if(str=='0')
-		window.location.href="chooseSys.jsp";
+	if(str=='0'){
+		var username = document.getElementById('username').value;
+		var password = document.getElementById('password').value;
+		var xmlhttp;
+		if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+				if(flag=='loginSuccess')
+					window.location.href="chooseSys.jsp";
+				else
+					alert('账号未激活或密码错误，请联系管理员');
+		    }
+		};
+		xmlhttp.open("GET","../server/login.jsp?username="+username+"&password="+password+"&p="+Math.random(),true);
+		xmlhttp.send();
+		
+	}
+		
 	else if(str=='xuanke')
 		window.location.href="home.jsp";
 	else if(str=='zuoye')
