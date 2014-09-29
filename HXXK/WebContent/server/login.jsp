@@ -4,7 +4,7 @@
 	String username = request.getParameter("username").toString();
 	String password = request.getParameter("password").toString();
 	int IF_SUCCESS = new DB().login(username, password);
-	if(IF_SUCCESS==1)
+	if(IF_SUCCESS==0)
 		out.write("loginSuccess");
 	else
 		out.write("loginFailed");
