@@ -58,7 +58,7 @@ function go_login(id){
 			$('#no33').fadeToggle(function(){
 				$('#no2').animate({
 					left:'0px'
-				},'slow',function(){
+				},function(){
 					$('div.loginBox').show();
 				});
 			});		
