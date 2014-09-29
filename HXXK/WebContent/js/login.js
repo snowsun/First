@@ -114,8 +114,11 @@ function log(str){
 				var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
 				if(flag=='loginSuccess')
 					window.location.href="chooseSys.jsp";
-				else
+				else{
 					alert('账号未激活或密码错误，请联系管理员');
+					document.getElementById('username').value='';
+				 	document.getElementById('password').value='';
+				}
 		    }
 		};
 		xmlhttp.open("GET","../server/login.jsp?username="+username+"&password="+password+"&p="+Math.random(),true);
