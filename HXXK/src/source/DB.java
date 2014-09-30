@@ -29,4 +29,8 @@ public class DB {
 		stmt.close();
 		return success;
 	}
+	
+	public static void main(String args[]){
+		
+	}
 }
