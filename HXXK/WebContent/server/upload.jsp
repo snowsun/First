@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
  <jsp:directive.page import="com.jspsmart.upload.SmartUpload"/>
  <jsp:directive.page import="com.jspsmart.upload.File"/>
+ <%@ page import="source.DeleteAllFile" %>
  <%@include file="../jsp/common/common.jsp"%>
  <%
  try {
@@ -12,6 +13,10 @@
 		mySmartUpload.upload();//开始上传，放到内存中
 		File myFile = mySmartUpload.getFiles().getFile(0);//获取上传地址
 		String fileLocation = application.getRealPath("/");/////////////////////////////////******important
+		/*
+			删除文件夹下所有已存在上传文件
+		*/
+		new DeleteAllFile().delAllFile(fileLocation+"/upload");
 		if (!myFile.isMissing()) {//路径存在
 			String extname = myFile.getFileExt();//获取文件主路径
 			if(!extname.equals("xls")){
@@ -25,8 +30,6 @@
 				String fileName = new Date().getTime() + "." + extname;// 产生一个唯一的文件名
 				System.out.println(fileName);
 				myFile.saveAs(fileLocation+"/upload/"+fileName);//更换路径重命名
-				//request.setAttribute("message", "file upload success!");
-	 			//request.setAttribute("target", "upload/" + fileName);
 			}
  		} 
 		else{
@@ -43,5 +46,4 @@
 		</script>
 	 <%	
  }
-
  %>

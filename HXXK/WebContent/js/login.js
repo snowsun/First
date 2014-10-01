@@ -1,5 +1,7 @@
 /*计算大小，初始化网格布局*/
+
 function onLoading(){
+/*
 	// ��ȡ���ڿ��
 	if (window.innerWidth)
 		winWidth = window.innerWidth;
@@ -16,14 +18,16 @@ function onLoading(){
 		winHeight = document.documentElement.clientHeight;
 		winWidth = document.documentElement.clientWidth;
 	}
+*/
+	var winHeight = document.body.clientHeight;
+	var winWidth = document.body.clientWidth;
+	
 	var left=(winWidth-768)/2.0;
 	var top=(winHeight-256)/2.0;
 	var left2=(winWidth-800)/2.0;
 	var left3=(winWidth-300)/2.0;
 	var top3=(winHeight-200)/2.0; 
-//	alert(top);
-//	onresize=onLoading;
-//	alert(winHeight+"  "+winWidth);
+	
 	document.getElementById("qwe").style.cssText='top:'+top+';left:'+left;
 	document.getElementById("face").style.cssText='left:'+left2;
 	document.getElementById("hidenBox").style.cssText='top:'+top3+';left:'+left3;

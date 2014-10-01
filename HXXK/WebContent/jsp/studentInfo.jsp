@@ -10,11 +10,19 @@
 	<body>
 		<center>
 			<input type="button" id="excelInput" value="从EXCEL表导入学生信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disStu('1')"/>
-			<input type="button" id="handInput" value="手动导入学生信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;display:none;" onClick="disStu('2')"/>
-			<input type="button" id="pswReset" value="学生密码重置" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;display:none;" onClick="disStu('3')"/>
+			<input type="button" id="handInput" value="手动导入学生信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disStu('2')"/>
+			<input type="button" id="pswReset" value="学生密码重置" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disStu('3')"/>
+			
+			<!--
+			
+			下面部分从Excel导入信息
+			
+			-->
+			<div id="ddd" style="display:none;">
 			<br><br>
 			<form action="../server/upload.jsp" method="post" enctype="multipart/form-data" target="hidden_frame" onsubmit="return checkExt()">
-			<input type="file" style="width:50%;height:10%;border-radius:5px;cursor:hand;" name="file" id="file">
+			<input type="file" style="border-radius:5px;cursor:hand;" name="file" id="file">
+			
 			<br><br>
 			<input type="submit" style="width:50%;height:10%;border-radius:5px;cursor:hand;" value="上传">
 			<br>
@@ -23,6 +31,8 @@
 			
 			<input type="button" id="import" style="width:50%;height:10%;border-radius:5px;cursor:hand;" disabled="disabled" value="导入">
 			<iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
+			
+			</div>
 			
 		</center>
 	</body>

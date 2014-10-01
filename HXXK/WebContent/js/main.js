@@ -3,7 +3,9 @@ function disStu(str){
 	if(str=='1'){
 		document.getElementById('excelInput').disabled='disabled';
 		$('#handInput').fadeToggle();
-		$('#pswReset').fadeToggle();
+		$('#pswReset').fadeToggle(function(){
+			document.getElementById('ddd').style.display='';
+		});	
 	}
 	else if(str=='2'){
 		document.getElementById('handInput').disabled='disabled';
@@ -22,7 +24,7 @@ var num = 10;
 function clock(){
 	
 	if(num==0){
-		document.getElementById('hiddenClock').innerHTML='文件上传成功';
+		document.getElementById('hiddenClock').innerHTML='文件上传成功,请点击导入按钮导入学生信息';
 		document.getElementById('import').disabled='';
 		num = 10;
 		return;
