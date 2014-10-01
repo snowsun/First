@@ -23,11 +23,13 @@ public class DeleteAllFile {
 	          if (temp.isFile()) {
 	             temp.delete();
 	          }
+	          /*
 	          if (temp.isDirectory()) {
 	             delAllFile(path + "/" + tempList[i]);//先删除文件夹里面的文件
 	     //        delFolder(path + "/" + tempList[i]);//再删除空文件夹
 	             flag = true;
 	          }
+	          */
 	       }
 	       return flag;
 	 }
