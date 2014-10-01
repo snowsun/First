@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=GB2312" %>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="source.DB"%>
 <%	
 	String username = request.getParameter("username").toString();

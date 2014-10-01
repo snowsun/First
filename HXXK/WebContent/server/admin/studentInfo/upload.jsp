@@ -2,7 +2,7 @@
  <jsp:directive.page import="com.jspsmart.upload.SmartUpload"/>
  <jsp:directive.page import="com.jspsmart.upload.File"/>
  <%@ page import="source.DeleteAllFile" %>
- <%@include file="../jsp/common/common.jsp"%>
+ <%@include file="../../../jsp/common/common.jsp"%>
  <%
  try {
  		SmartUpload mySmartUpload = new SmartUpload();//初始化对象
@@ -28,7 +28,6 @@
 			}
 			else{
 				String fileName = new Date().getTime() + "." + extname;// 产生一个唯一的文件名
-				System.out.println(fileName);
 				myFile.saveAs(fileLocation+"/upload/"+fileName);//更换路径重命名
 			}
  		} 
