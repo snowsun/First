@@ -40,14 +40,29 @@
 			
 			-->
 			<div id="handImp" style="display:none;">
-				<br><br>
+				<br>
+				<span style="color:red;font-size:18px;font-family:'黑体';">请仔细核实学生姓名学号，导入错误后将无法恢复</span>
+				<br>
 				学生学号:<input type="text" id="id" style="width:20%;height:10%;border-radius:8px;">
 				学生姓名:<input type="text" id="name" style="width:20%;height:10%;border-radius:8px;">
 				<br><br>
 				<button id="import2" style="width:30%;height:10%;border-radius:5px;cursor:hand;"  onClick="impToDB2()">导入</button>			
+				<br>
+				<span id='hiddenRemark2' style="color:red;font-size:18px;font-family:'黑体';"></span>
 			</div>
 			
+			<!--
 			
+			下面部分手动重置密码
+			
+			-->
+			<div id="resetPsw" style="display:none;">
+				<br><br>
+				学生学号:<input type="text" id="id2" style="width:20%;height:10%;border-radius:8px;">
+				<button id="reset" style="width:15%;height:10%;border-radius:5px;cursor:hand;"  onClick="resetPsw()">重置</button>
+				<br>
+				<span id='hiddenRemark3' style="color:red;font-size:18px;font-family:'黑体';"></span>
+			</div>
 			
 		</center>
 	</body>

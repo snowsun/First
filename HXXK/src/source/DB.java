@@ -73,6 +73,37 @@ public class DB {
 		}	
 		
 	}
+	
+	
+	/***重置学生密码***///=====================================================================
+	public int resetPsw(String id){
+		Connection con=null;
+		Statement stmt=null;
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK","sa","131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		
+		String sql = "update baseInfo set password='"+id+"' where id='"+id+"'";
+		try {
+			stmt.executeUpdate(sql);
+			con.close();
+			stmt.close();	
+			return 1; //重置密码成功
+		} catch (SQLException e) {
+			return -1; //数据库操作失败
+		}
+		
+
+	
+	}
 	public static void main(String args[]){
 		
 	}
