@@ -166,9 +166,103 @@ function resetPsw(){//重置学生密码
 	
 }
 
-
-
-
+/********************************************This block is for teacherInfo.jsp************************************************/
+function disTea(str){//显示相关函数
+	if(str=='1'){
+		document.getElementById('handInput').disabled='disabled';
+		$('#pswReset').fadeToggle();
+		$('#deleteTeacher').fadeToggle(function(){
+			document.getElementById('handImp').style.display='';
+		});	
+	}
+	else if(str=='2'){
+		document.getElementById('pswReset').disabled='disabled';
+		$('#deleteTeacher').fadeToggle();
+		$('#handInput').fadeToggle(function(){
+			document.getElementById('resetPsw').style.display='';
+		});
+	}
+	else if(str=='3'){
+		document.getElementById('deleteTeacher').disabled='disabled';
+		$('#handInput').fadeToggle();
+		$('#pswReset').fadeToggle(function(){
+			document.getElementById('deleteTe').style.display='';
+		});
+	}
+}
+//====================================================================
+function impToDB3(){//手动导入教师信息
+	var id = document.getElementById("id").value.replace(/^\s*|\s*$/g,"");
+	var name = document.getElementById("name").value.replace(/^\s*|\s*$/g,"");
+	name = encodeURI(encodeURI(name));
+	var len = id.length,len1=name.length;
+	if(len==0||len1==0){
+		alert('姓名工号不可为空');
+		return;
+	}
+	for(var r = 0 ; r < len ; r++){
+		if(id[r]>'9'||id[r]<'0'){
+			alert('请检查工号');
+			return;
+		}
+			
+	}
+	
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='error4')
+				document.getElementById('hiddenRemark1').innerHTML='数据库存储错误，点击左侧教师信息按钮刷新';
+			else
+				document.getElementById('hiddenRemark1').innerHTML=flag+',点击左侧教师信息按钮刷新';
+			
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/teacherInfo/uploadTeacher1.jsp?id="+id+"&name="+name+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
+//====================================================================
+function resetPsw2(){//重置教师密码
+	var id = document.getElementById("id2").value.replace(/^\s*|\s*$/g,"");
+	var len = id.length;
+	if(len==0){
+		alert('姓名工号不可为空');
+		return;
+	}
+	for(var r = 0 ; r < len ; r++){
+		if(id[r]>'9'||id[r]<'0'){
+			alert('请检查工号');
+			return;
+		}	
+	}
+	
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='error4')
+				document.getElementById('hiddenRemark2').innerHTML='数据库存储错误，点击左侧教师信息按钮刷新';
+			else
+				document.getElementById('hiddenRemark2').innerHTML=flag+',点击左侧教师信息按钮刷新';
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/teacherInfo/resetPsw.jsp?id="+id+"&p="+Math.random(),true);
+	xmlhttp.send();
+	
+}
 
 
 

@@ -45,7 +45,7 @@
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/studentInfo.jsp" class="cs-navi-tab">
   					<button class="cs-link">学生信息</button>
   				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacherInfo.jsp" class="cs-navi-tab">
   					<button class="cs-link">教师信息</button>
   				</a><br>
 			</div>

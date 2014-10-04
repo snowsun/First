@@ -30,7 +30,7 @@ public class DB {
 	}
 	
 	/***加入学生信息***///=====================================================================
-	public int insertNewInfo(String info[][]){
+	public int insertNewInfo(String info[][],int flag){
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet res=null;
@@ -45,7 +45,8 @@ public class DB {
 			System.out.println("连接失败");
 			ex.printStackTrace();
 		}
-		String checkSql="",sql="",id="",psw="",name="";	
+		
+		String checkSql="",sql="",id="",psw="",name="";
 		int i = 0 ;
 		try {
 			for(;i<200;i++){
@@ -56,7 +57,7 @@ public class DB {
 					checkSql = "select * from baseInfo where id='"+id+"'";
 					res= stmt.executeQuery(checkSql);
 					if(!res.next()){
-						sql = "insert into baseInfo values('"+id+"','"+psw+"','"+name+"',2)";
+						sql = "insert into baseInfo values('"+id+"','"+psw+"','"+name+"',"+flag+")";
 						stmt.executeUpdate(sql);
 					}
 				}
@@ -75,7 +76,7 @@ public class DB {
 	}
 	
 	
-	/***重置学生密码***///=====================================================================
+	/***重置密码***///=====================================================================
 	public int resetPsw(String id){
 		Connection con=null;
 		Statement stmt=null;

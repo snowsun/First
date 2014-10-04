@@ -22,7 +22,7 @@
 		else if(info[0][0].equals("fileWrong"))
 			out.write("error3");//文件格式错误，请仔细核查！！！
 		else{
-			int fl=new DB().insertNewInfo(info);
+			int fl=new DB().insertNewInfo(info,2);
 			if(fl==-1)
 				out.write("error4");//数据库存储错误
 			else
