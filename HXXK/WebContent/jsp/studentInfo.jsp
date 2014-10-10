@@ -4,10 +4,10 @@
 <html>
 	<head>
 		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<script type="text/javascript" src="../js/main.js"></script>
+		<script type="text/javascript" src="../js/userManage.js"></script>
 		<title>学生信息管理</title>
 	</head>
-	<body>
+	<body style="background-color:lightgreen;">
 		<center>
 			<input type="button" id="excelInput" value="从EXCEL表导入学生信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disStu('1')"/>
 			<input type="button" id="handInput" value="手动导入学生信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disStu('2')"/>

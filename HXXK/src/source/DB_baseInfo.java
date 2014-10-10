@@ -1,6 +1,6 @@
 package source;
 import java.sql.*;
-public class DB {
+public class DB_baseInfo {
 	
 	/***登录***///=========================================================================
 	public int login(String username ,String password) throws SQLException{

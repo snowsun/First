@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
  <%@ page import="source.*" %>
-<%	
+<%
 	String id = request.getParameter("id").toString();
-	int fl = new DB().resetPsw(id);
+	int fl = new DB_baseInfo().resetPsw(id);
 	if(fl==-1)
 		out.write("error4");
 	else

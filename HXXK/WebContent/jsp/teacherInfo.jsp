@@ -4,10 +4,10 @@
 <html>
 	<head>
 		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<script type="text/javascript" src="../js/main.js"></script>
+		<script type="text/javascript" src="../js/userManage.js"></script>
 		<title>教师信息管理</title>
 	</head>
-	<body>
+	<body style="background-color:lightgreen;">
 		<center>
 			<input type="button" id="handInput" value="手动导入教师信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disTea('1')"/>
 			<input type="button" id="pswReset" value="教师密码重置" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disTea('2')"/>

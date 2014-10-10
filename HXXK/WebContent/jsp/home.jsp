@@ -31,14 +31,17 @@
   				</a><br>
 			</div>
 			<div title="课程管理" >
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">课程信息</button>
+				<a href="javascript:void(0)"  src="<%=basePath%>jsp/config.jsp" class="cs-navi-tab">
+  					<button class="cs-link">STEP1.全局信息设置</button>
+  				</a><br>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/laboratory.jsp" class="cs-navi-tab">
+  					<button class="cs-link">STEP2.实验室信息设置</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">实验室信息</button>
+  					<button class="cs-link">STEP3.实验信息设置</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">实验信息</button>
+  					<button class="cs-link">STEP4.课程信息设置</button>
   				</a><br>
 			</div>
 			<div title="用户管理" >
