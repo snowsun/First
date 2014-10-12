@@ -8,14 +8,19 @@
 		<title>课程信息全局设置</title>
 	</head>
 	<body style="background-color:lightgreen;font-family:'微软雅黑';" onLoad="onloading_laboratory()">
+	
 		<center>
-			<div id='btn'>
-			<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onClick="add_">增加实验室</a>  
-			<a class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除实验室</a>
-			</div><br><br><br>
+			<div id="btn">
+			<a id="add"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-add'" onClick="add()">增加实验室</a>  
+			<a id="sub"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onClick="remove_laboratory()">删除实验室</a>
+			<a id="save" href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="display:none;" onClick="save_laboratory()">保存实验室</a>
+			</div><br><br>
 			
 			<table border="1" id="table" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
-			</table>
+			</table>	
 		</center>
+		
+		<!-- HIDDEN_SPAN for recording laboratory's number -->
+		<span id="record" style="display:none;"></span>
 	</body>
 </html>

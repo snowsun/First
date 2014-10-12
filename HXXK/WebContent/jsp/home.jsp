@@ -37,7 +37,7 @@
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/laboratory.jsp" class="cs-navi-tab">
   					<button class="cs-link">STEP2.实验室信息设置</button>
   				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/experiment.jsp" class="cs-navi-tab">
   					<button class="cs-link">STEP3.实验信息设置</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">

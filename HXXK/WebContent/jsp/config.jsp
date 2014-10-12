@@ -21,7 +21,8 @@
 		</div>
 		
 		<center> 
-		<table id="opTable" border="1">
+		<table border="1" id="opTable" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;border-collapse:collapse;">
+		
 		<tr>
 		<td>请选择当前年份   </td>
 		<td>
@@ -53,21 +54,8 @@
 		</select>  
 		</td>
 		</tr>
-		<tr>
-		<td>请选择选课系统开启日期  &nbsp</td>
-		<td>
-		<input id="ee" type="text" class="easyui-datebox" required="required"></input>
-		</td>
-		</tr>
 		
 		<tr>
-		<td>请选择选课系统关闭日期</td>
-		<td>
- 		<input id="ff" type="text" class="easyui-datebox" required="required"></input>
- 		</td>
- 		</tr>
- 		
- 		<tr>
  		<td>请设置实验从第几周开始</td>
  		<td>
  		<select id="gg" class="easyui-combobox" name="dept" style="width:200px;">   
@@ -82,6 +70,79 @@
 		</select>  
  		</td>
  		</tr>
+		
+		<tr>
+		<td>请选择课程上课时间</td>
+		
+		<td align="center">
+		<table border="1" style="color:black;width:100%;">
+			<tr align ="center" >
+				<td>时间</td>
+				<td>周一</td>
+				<td>周二</td>
+				<td>周三</td>
+				<td>周四</td>
+				<td>周五</td>
+			</tr>
+			<tr align ="center" >
+				<td>上午1-2</td>
+				<td><input type="checkbox" id="check1_1"></td>
+				<td><input type="checkbox" id="check1_2"></td>
+				<td><input type="checkbox" id="check1_3"></td>
+				<td><input type="checkbox" id="check1_4"></td>
+				<td><input type="checkbox" id="check1_5"></td>
+			</tr>
+			<tr align ="center" >
+				<td>上午3-4</td>
+				<td><input type="checkbox" id="check2_1"></td>
+				<td><input type="checkbox" id="check2_2"></td>
+				<td><input type="checkbox" id="check2_3"></td>
+				<td><input type="checkbox" id="check2_4"></td>
+				<td><input type="checkbox" id="check2_5"></td>
+			</tr>
+			<tr align ="center" >
+				<td>下午1-2</td>
+				<td><input type="checkbox" id="check3_1"></td>
+				<td><input type="checkbox" id="check3_2"></td>
+				<td><input type="checkbox" id="check3_3"></td>
+				<td><input type="checkbox" id="check3_4"></td>
+				<td><input type="checkbox" id="check3_5"></td>
+			</tr>
+			<tr align ="center" >
+				<td>下午3-4</td>
+				<td><input type="checkbox" id="check4_1"></td>
+				<td><input type="checkbox" id="check4_2"></td>
+				<td><input type="checkbox" id="check4_3"></td>
+				<td><input type="checkbox" id="check4_4"></td>
+				<td><input type="checkbox" id="check4_5"></td>
+			</tr>
+			<tr align ="center" >
+				<td>晚上1-2</td>
+				<td><input type="checkbox" id="check5_1"></td>
+				<td><input type="checkbox" id="check5_2"></td>
+				<td><input type="checkbox" id="check5_3"></td>
+				<td><input type="checkbox" id="check5_4"></td>
+				<td><input type="checkbox" id="check5_5"></td>
+			</tr>
+		</table>
+		</td>
+		</tr>
+		
+		<tr>
+		<td>请选择选课系统开启日期 </td>
+		<td>
+		<input id="ee" type="text" class="easyui-datebox" required="required"></input>
+		</td>
+		</tr>
+		
+		<tr>
+		<td>请选择选课系统关闭日期</td>
+		<td>
+ 		<input id="ff" type="text" class="easyui-datebox" required="required"></input>
+ 		</td>
+ 		</tr>
+ 		
+ 		
  		
  		<tr>
  		<td><center>
@@ -111,6 +172,14 @@
 				<td><span id="lab_no"></span></td>
 			</tr>
 			<tr>
+				<td>实验开始周次为</td>
+				<td><span id="week"></span></td>
+			</tr>
+			<tr>
+				<td>实验课开课时间为</td>
+				<td><span id="openTime"></span></td>
+			</tr>
+			<tr>
 				<td>系统开启时间为</td>
 				<td><span id="begin_time"></span></td>
 			</tr>
@@ -118,10 +187,7 @@
 				<td>系统关闭时间为</td>
 				<td><span id="end_time"></span></td>
 			</tr>
-			<tr>
-				<td>实验开始周次为</td>
-				<td><span id="week"></span></td>
-			</tr>
+			
 			<tr>
  				<td><center>
  					<button id="change" style="cursor:hand;" onClick="change_clicked()">修改</button>
