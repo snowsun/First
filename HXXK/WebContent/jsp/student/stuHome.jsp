@@ -36,7 +36,7 @@
   				</a><br>
 			</div>
 			<div title="用户管理" >
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/xxx.jsp" class="cs-navi-tab">
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/stuRePassword.jsp" class="cs-navi-tab">
   					<button class="cs-link">修改密码</button>
   				</a><br>
 			</div>
