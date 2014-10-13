@@ -28,7 +28,7 @@
   				</a><br>
 			</div>
 			<div title="课程管理" >
-				<a href="javascript:void(0)"  src="<%=basePath%>jsp/xxx.jsp" class="cs-navi-tab">
+				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/courseChoose.jsp" class="cs-navi-tab">
   					<button class="cs-link">学期选课</button>
   				</a><br>
 				<a href="javascript:void(0)"  src="<%=basePath%>jsp/xxx.jsp" class="cs-navi-tab">

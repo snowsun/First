@@ -5,9 +5,19 @@
 	String password = request.getParameter("password").toString();
 	int IF_SUCCESS = new DB_baseInfo().login(username, password);
 	if(IF_SUCCESS==1){
-		out.write("loginSuccess");
-		session.setAttribute("userID", "username");
 		
+		int flag = new DB_baseInfo().getUserType(username);
+		if(flag==1){
+			out.write("admin");
+		}
+// 		out.write("loginSuccess");
+// 		session.setAttribute("userID", "username");
+		else if(flag==2){
+			out.write("stu");
+		}
+		else{
+			out.write("loginFailed");
+		}
 	}
 	else
 		out.write("loginFailed");
