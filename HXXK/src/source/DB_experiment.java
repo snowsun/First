@@ -82,7 +82,7 @@ public class DB_experiment {
 		}	
 	}
 	
-	/***增加实验室信息***///=====================================================================
+	/***删除实验室信息***///=====================================================================
 	public int dalete_experiment(String no,String name,String turnal,String laboratory,String teacher,String time,String status,String limit){
 		Connection con=null;
 		Statement stmt=null;

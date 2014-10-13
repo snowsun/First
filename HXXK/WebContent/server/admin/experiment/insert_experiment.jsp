@@ -15,8 +15,12 @@
 	String limit = request.getParameter("limit").toString();
 	System.out.println(no+" "+name+" "+turnal+" "+laboratory+" "+teacher+" "+time+" "+status+" "+limit);
 	int fl = new DB_experiment().insert_experiment(no, name, turnal, laboratory, teacher, time, status, limit);
-	if(fl==1)
+	int fl1 = new DB_mainInfo().insert_mainInfo(no, name, turnal, laboratory, teacher, time, status, limit);
+	if(fl==1&&fl1==1)
 		out.write("success");
-	else
+	else{
+		new DB_experiment().dalete_experiment(no, name, turnal, laboratory, teacher, time, status, limit);
 		out.write("failed");
+	}
+		
 %>

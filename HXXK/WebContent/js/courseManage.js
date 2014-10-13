@@ -445,7 +445,7 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 function initial(str){
 	var obj; 
 	//week
-	document.getElementById('_TURNAL_').innerHTML=str.split('$')[0];
+	document.getElementById('_TURNAL_').innerHTML=3;
 	
 	//time
 	obj=document.getElementById('_TIME_');
