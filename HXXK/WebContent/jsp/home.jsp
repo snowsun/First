@@ -23,10 +23,10 @@
     <div data-options="region:'west',title:'功能菜单',split:false" class="cs-west">
     	<div class="easyui-accordion" fit="true" border="false">
     		<div title="课程公告" >
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/stuNotice.jsp" class="cs-navi-tab">
   					<button class="cs-link">查看公告</button>
   				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/updateNotice.jsp" class="cs-navi-tab">
   					<button class="cs-link">发布新公告</button>
   				</a><br>
 			</div>
