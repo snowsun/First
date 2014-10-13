@@ -9,11 +9,11 @@
 		int flag = new DB_baseInfo().getUserType(username);
 		if(flag==1){
 			out.write("admin");
+	 		session.setAttribute("userID", username);
 		}
-// 		out.write("loginSuccess");
-// 		session.setAttribute("userID", "username");
 		else if(flag==2){
 			out.write("stu");
+			session.setAttribute("userID", username);
 		}
 		else{
 			out.write("loginFailed");

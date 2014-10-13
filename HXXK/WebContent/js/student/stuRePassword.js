@@ -7,13 +7,9 @@ $(document).ready(function(){
 	});
 	$('#changePassword').click(function(){
 		var userID = $('#userID').text();
-		alert('$'+userID+'$');
 		var oldPassword = $('#oldPassword').val();
-		alert('$'+oldPassword+'$');
 		var newPassword = $('#newPassword').val();
-		alert('$'+newPassword+'$');
 		var newPasswordAffirm = $('#newPasswordAffirm').val();
-		alert('$'+newPasswordAffirm+'$');
 		if(newPassword!=newPasswordAffirm){
 			alert("新密码两次输入的值不匹配");
 			return;
