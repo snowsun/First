@@ -116,8 +116,10 @@ function log(str){
 		xmlhttp.onreadystatechange=function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
-				if(flag=='loginSuccess')
-					window.location.href="chooseSys.jsp";
+				if(flag=='admin')
+					window.location.href="../jsp/home.jsp";
+				else if(flag=="stu")
+					window.location.href="../jsp/student/stuHome.jsp";
 				else{
 					alert('账号未激活或密码错误，请联系管理员');
 					document.getElementById('username').value='';
