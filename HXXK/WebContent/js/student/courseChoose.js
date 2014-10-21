@@ -1,10 +1,11 @@
 /***********************************************This block is for courseChoose.jsp*************************************/
 function FOR_DISPLAY(str){//USED BY ONLOADING
+
 	var table,row,col1,col2,col3,col4,col5,col6,col7,col8,span,check;
 	var __COLNUM__,__COLCHECK__;
 	table=document.getElementById('table');
 	
-	var _NUM_ = str.split('<>')[0];
+	var _NUM_ = str.split('<>')[1];
 	var num=parseInt(_NUM_);
 	document.getElementById('_NUM_').innerHTML=num;
 	
@@ -18,7 +19,7 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		document.getElementById('_TITLE_').appendChild(__COLCHECK__);
 
 	}	
-	var info = str.split('<>')[1].split('&');
+	var info = str.split('<>')[2].split('&');
 	var info_col;
 	var len = info.length-1;
 	if(len==0) return;
@@ -96,6 +97,7 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		for(var j=1;j<=num;j++){
 			span = document.createElement('span');
 			span.id='span_stu'+i+'_'+j;
+			span.style.color='blue';
 			span.innerHTML=info_col[7+j];
 			__COLNUM__ = document.createElement('td');
 			__COLNUM__.appendChild(span);
@@ -111,7 +113,28 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 			row.appendChild(__COLCHECK__);
 				
 		}	
-	}	
+	}
+	//判断是否显示操作按钮以及check框
+	var yes_or_no = str.split('<>')[0];
+	if(yes_or_no=='yes'){
+		document.getElementById('add').style.display='none';
+		document.getElementById('ok').style.display='none';
+		var id ='check_stu';
+		var num=parseInt(document.getElementById('_NUM_').innerHTML);
+		var rows=parseInt(document.getElementById('_ROWS_').innerHTML);
+		for(var i=0;i<rows;i++){
+			for(var j=1;j<=num;j++){
+				id=id+i+'_'+j;
+				document.getElementById(id).disabled=true;
+				id = 'check_stu';
+			}
+		}
+		
+		
+		alert('您已经成功完成了选课操作,无需再次操作,若需要调整选课,请联系课程管理员');
+	}
+	
+	
 }
 //====================================================================
 function onloading_courseChoose(){//页面载入加载函数;
@@ -125,9 +148,12 @@ function onloading_courseChoose(){//页面载入加载函数;
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
-			/*构造显示*/
-			FOR_DISPLAY(flag);
-	//		initial(flag.split('&$')[1]);
+			if(flag=='failed')
+				alert('数据库访问失败，请稍后再次进行访问！');
+			else{
+				/*构造显示*/
+				FOR_DISPLAY(flag);
+			}
 	    }
 	};
 	xmlhttp.open("GET","../../server/student/courseChoose/fetch_mainInfo.jsp?p="+Math.random(),true);
@@ -167,10 +193,58 @@ function refresh(){
 }
 //=====================================================================
 function submit(){
+	var num=parseInt(document.getElementById('_NUM_').innerHTML);
+	var rows=parseInt(document.getElementById('_ROWS_').innerHTML);
+	var id ='check_stu',k=0;
+	var INFO ='';
+	for(var i=0;i<rows;i++){
+		for(var j=1;j<=num;j++){
+			id=id+i+'_'+j;
+			obj= document.getElementById(id);
+			if(obj.checked==true){
+				k=k+1;
+				if(k<num){
+					INFO = INFO + document.getElementById('spanNo'+i).innerHTML + '_' + j + '*';
+				}
+				else{
+					INFO = INFO + document.getElementById('spanNo'+i).innerHTML + '_' + j;
+				}
+			}
+			id = 'check_stu';
+		}
+	}
+	if(k<num){
+		alert('对不起，你选的课程数不满足本课程要求，请继续选课');
+		return;
+	}
+	
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			/*构造显示*/
+			if(flag=='success'){
+				alert('选课操作成功，您可以到我的课表中查看或导出选课信息');
+				window.location.reload(true);
+			}
+			else{
+				alert('数据库操作失败，这有可能是以下原因造成的：\n1.当前使用系统人数过多，推荐您在系统空闲时进行选课\n2.您选择的课程已经满员,请优先选择已选人数较少的课程\n');
+			}
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/courseChoose/submit_courses.jsp?INFO="+INFO+"&p="+Math.random(),true);
+	xmlhttp.send();
 	
 }
-
-
+/***********************************************This block is for schedule.jsp*************************************/
+function loading_schedule(){
+}
 
 
 

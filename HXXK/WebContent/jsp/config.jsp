@@ -86,43 +86,11 @@
 			</tr>
 			<tr align ="center" >
 				<td>上午1-2</td>
-				<td><input type="checkbox" id="check1_1"></td>
-				<td><input type="checkbox" id="check1_2"></td>
-				<td><input type="checkbox" id="check1_3"></td>
-				<td><input type="checkbox" id="check1_4"></td>
-				<td><input type="checkbox" id="check1_5"></td>
-			</tr>
-			<tr align ="center" >
-				<td>上午3-4</td>
-				<td><input type="checkbox" id="check2_1"></td>
-				<td><input type="checkbox" id="check2_2"></td>
-				<td><input type="checkbox" id="check2_3"></td>
-				<td><input type="checkbox" id="check2_4"></td>
-				<td><input type="checkbox" id="check2_5"></td>
-			</tr>
-			<tr align ="center" >
-				<td>下午1-2</td>
-				<td><input type="checkbox" id="check3_1"></td>
-				<td><input type="checkbox" id="check3_2"></td>
-				<td><input type="checkbox" id="check3_3"></td>
-				<td><input type="checkbox" id="check3_4"></td>
-				<td><input type="checkbox" id="check3_5"></td>
-			</tr>
-			<tr align ="center" >
-				<td>下午3-4</td>
-				<td><input type="checkbox" id="check4_1"></td>
-				<td><input type="checkbox" id="check4_2"></td>
-				<td><input type="checkbox" id="check4_3"></td>
-				<td><input type="checkbox" id="check4_4"></td>
-				<td><input type="checkbox" id="check4_5"></td>
-			</tr>
-			<tr align ="center" >
-				<td>晚上1-2</td>
-				<td><input type="checkbox" id="check5_1"></td>
-				<td><input type="checkbox" id="check5_2"></td>
-				<td><input type="checkbox" id="check5_3"></td>
-				<td><input type="checkbox" id="check5_4"></td>
-				<td><input type="checkbox" id="check5_5"></td>
+				<td><input type="checkbox" id="check1"></td>
+				<td><input type="checkbox" id="check2"></td>
+				<td><input type="checkbox" id="check3"></td>
+				<td><input type="checkbox" id="check4"></td>
+				<td><input type="checkbox" id="check5"></td>
 			</tr>
 		</table>
 		</td>

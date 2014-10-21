@@ -13,6 +13,15 @@
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.linkbutton.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.parser.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.tabs.js"></script>
+
+<script type="text/javascript">
+	var SESSION_ID = "<%=request.getSession().getAttribute("userID") %>";
+	var SESSION_TYPE = "<%=request.getSession().getAttribute("userType") %>";
+	if(SESSION_ID=='null' || SESSION_TYPE!='admin'){
+		window.location.href='login.jsp';
+	}
+</script>
+
 </head>
 <body class="easyui-layout" onLoad="time()">
     <div data-options="region:'north',split:false" class="cs-north">
@@ -41,7 +50,7 @@
   					<button class="cs-link">STEP3.实验信息设置</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">STEP4.课程信息设置</button>
+  					<button class="cs-link">选课情况查看</button>
   				</a><br>
 			</div>
 			<div title="用户管理" >

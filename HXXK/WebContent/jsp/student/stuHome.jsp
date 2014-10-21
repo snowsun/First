@@ -13,6 +13,13 @@
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.linkbutton.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.parser.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.tabs.js"></script>
+<script type="text/javascript">
+	var SESSION_ID = "<%=request.getSession().getAttribute("userID") %>";
+	var SESSION_TYPE = "<%=request.getSession().getAttribute("userType") %>";
+	if(SESSION_ID=='null' || SESSION_TYPE!='stu'){
+		window.location.href='../login.jsp';
+	}
+</script>
 </head>
 <body class="easyui-layout" onLoad="time()">
     <div data-options="region:'north',split:false" class="cs-north">
@@ -31,7 +38,7 @@
 				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/courseChoose.jsp" class="cs-navi-tab">
   					<button class="cs-link">学期选课</button>
   				</a><br>
-				<a href="javascript:void(0)"  src="<%=basePath%>jsp/xxx.jsp" class="cs-navi-tab">
+				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/schedule.jsp" class="cs-navi-tab">
   					<button class="cs-link">我的课表</button>
   				</a><br>
 			</div>

@@ -39,7 +39,7 @@ public class DB_mainInfo {
 	}
 	
 	/***增加实验室信息***///=====================================================================
-	public int dalete_mainInfo(String no,String name,String turnal,String laboratory,String teacher,String time,String status,String limit){
+	public int dalete_mainInfo(String no){
 		Connection con=null;
 		Statement stmt=null;
 		int flag = 1 ;
@@ -54,7 +54,7 @@ public class DB_mainInfo {
 			System.out.println("连接失败");
 			ex.printStackTrace();
 		}
-		String sql = "delete from mainInfo where no="+no+" and name='"+name+"' and turnal="+turnal+" and laboratory='"+laboratory+"' and teacher='"+teacher+"' and time='"+time+"' and status="+status+" and limit="+limit;     
+		String sql = "delete from mainInfo where no="+no;
 		try {
 			stmt.executeUpdate(sql);
 			con.close();
@@ -85,7 +85,7 @@ public class DB_mainInfo {
 			ex.printStackTrace();
 		}
 		
-		String sql = "select * from mainInfo order by NO asc";
+		String sql = "select * from mainInfo order by NAME asc";
 		try {
 			res= stmt.executeQuery(sql);
 			int i = 0 ;
@@ -119,8 +119,104 @@ public class DB_mainInfo {
 		}	
 	}
 	
-	public static void main(String []args){
-		
-		
+	/***判断传入课程是否可选***///=====================================================================
+	public boolean if_can_be_chosen(String c_id , String c_t){
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet res = null;
+		int max_num , now_num;
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK","sa","131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		String col_num = "LAB"+c_t+"_NUM" , col_list = "LAB"+c_t+"_LIST";
+		String sql = "select LIMIT,"+col_num+","+col_list+" from mainInfo where NO='"+c_id+"'";
+		try {
+			res= stmt.executeQuery(sql);
+			if(res.next()){
+				max_num = Integer.parseInt(res.getString(1).toString().trim());
+				now_num = Integer.parseInt(res.getString(2).toString().trim());
+			}
+			else{
+				res.close();
+				con.close();
+				stmt.close();	
+				return false;
+			}
+			if(max_num <= now_num){
+				res.close();
+				con.close();
+				stmt.close();	
+				return false;
+			}			
+			res.close();
+			con.close();
+			stmt.close();	
+			return true;
+		} catch (SQLException e) {
+			//数据库操作失败
+			return false;
+		}	
+	}
+	
+	/***将学生增加到信息表中***///=====================================================================
+	public boolean add_one_record(String userID , String c_id , String c_t){
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet res = null;
+		int now_num;
+		String list="";
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK","sa","131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		String col_num = "LAB"+c_t+"_NUM" , col_list = "LAB"+c_t+"_LIST";
+		String sql = "select "+col_num+","+col_list+" from mainInfo where NO='"+c_id+"'";
+		try {
+			res= stmt.executeQuery(sql);
+			if(res.next()){
+				now_num = Integer.parseInt(res.getString(1).toString().trim())+1;
+				list = res.getString(2).toString().trim();
+				if(!list.contains(userID)){
+					String now_list = list+userID+"#";
+					sql = "update mainInfo set "+col_num+"="+now_num+","+col_list+"='"+now_list+"' where NO='"+c_id+"'";
+					stmt.executeUpdate(sql);
+				}	
+				
+			}
+			else{
+				res.close();
+				con.close();
+				stmt.close();	
+				return false;
+			}			
+			res.close();
+			con.close();
+			stmt.close();	
+			return true;
+		} catch (SQLException e) {
+			//数据库操作失败
+			return false;
+		}	
+	}
+	
+	
+	
+	public static void main(String []args){	
+	//	new DB_mainInfo().add_one_record("111220106", "30492152", "2");
 	}
 }

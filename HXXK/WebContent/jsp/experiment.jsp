@@ -48,6 +48,13 @@
 		</center>
 		
 		<!-- 试验编号 -->
+		<span id='_ID_'></span>
+		
+		
+		
+		
+		
+		<!-- 试验编号 -->
 		<select id="_NO_"  name="dept" style="width:100%;display:none;">   
 			<%
 				for(int i=1;i<=20;i++)
@@ -57,7 +64,8 @@
 				<%
 				}
 			%>		
-		</select>  
+		</select>
+		  
 		<!-- 试验名称-->
 		<input id="_NAME_" type="text" style="width:100%;display:none;">
 		<!-- 试验周期 -->

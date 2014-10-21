@@ -7,11 +7,6 @@
 	String week = ABOUT_CONFIG[3];
 	//time
 	String time = ABOUT_CONFIG[7];
-	time = time.replaceAll("_1", "");
-	time = time.replaceAll("_2", "");
-	time = time.replaceAll("_3", "");
-	time = time.replaceAll("_4", "");
-	time = time.replaceAll("_5", "");
 	time = time.replaceAll("@", "");
 	//room
 	String ROOM[] = new DB_laboratory().fetch_laboratory();
@@ -34,6 +29,7 @@
  	
  	
 	String info[][] = new DB_experiment().fetch_experiment();
+//	String info[][] = new DB_mainInfo().fetch_mainInfo();
 	if(info[0][0].equals("failed")){
 		out.write("failed");
 	}

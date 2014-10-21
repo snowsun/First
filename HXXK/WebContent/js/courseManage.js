@@ -14,16 +14,7 @@ function onLoading(){
 				alert("数据库操作失败，请点击左侧全局设置按钮刷新并重新配置！");
 				return ;
 			}
-			var fl = flag.split('&');
-			/*
-			document.getElementById('IF_CONFIG').innerHTML=fl[0];
-			document.getElementById('IF_USED').innerHTML=fl[1];
-			document.getElementById('YEAR').innerHTML=fl[2];
-			document.getElementById('LAB_NO').innerHTML=fl[3];
-			document.getElementById('BEGIN_TIME').innerHTML=fl[4];
-			document.getElementById('END_TIME').innerHTML=fl[5];
-			document.getElementById('WEEK').innerHTML=fl[6];
-			*/
+			 var fl = flag.split('&');
 			 $('#cc').combobox('setText',fl[2]);
 			 $('#dd').combobox('setText',fl[3]);
 			 $('#ee').combobox('setText',fl[4]);
@@ -32,11 +23,8 @@ function onLoading(){
 			 
 			 var ttt = fl[7].split('@');
 			 var len = ttt.length-1;
-			 var m,n;
 			 for(var i=0;i<len;i++){
-				 m=ttt[i][0];
-				 n=ttt[i][2];
-				 document.getElementById('check'+n+'_'+m).checked=true;
+				 document.getElementById('check'+ttt[i]).checked=true;
 			 }
 			 
 	    }
@@ -54,15 +42,13 @@ function yes_clicked(){//点击预览按钮效应
 	var week = $('#gg').combobox('getText').replace(/^\s*|\s*$/g,"");
 	//获取check的时间信息
 	var openTime='',IF_CHECKBOX_CLICKED=0,id='check';
-	for(var i=1;i<=5;i++){
-		for(var j=1;j<=5;j++){
-			id=id+i+'_'+j;
+	for(var i=1;i<=5;i++){	
+			id=id+i;
 			if(document.getElementById(id).checked==true){
 				IF_CHECKBOX_CLICKED=1;
-				openTime=openTime+j+'_'+i+'&';
+				openTime=openTime+i+'&';
 			}
 			id='check';
-		}
 	}
 	if(document.getElementById('IF_CONFIG').innerHTML=='1' && document.getElementById('IF_USED').innerHTML=='1'){
 		alert('您之前已经配置过全局设置，并且您已经用此全局设置发布了课程信息，请您遵循以下步骤：\n1.点击系统功能下面的选课初始化选项初始化选课操作\n2.点击课程管理下面的全局设置按钮重新配置全局设置\n3.点击课程管理下面的课程信息重新设置课程');
@@ -83,17 +69,12 @@ function yes_clicked(){//点击预览按钮效应
 	
 	//格式化上课时间显示格式
 	var timeDisplay=openTime;	
-	timeDisplay=timeDisplay.replace(/_1/g, '上午一、二节');
-	timeDisplay=timeDisplay.replace(/_2/g, '上午三、四节');
-	timeDisplay=timeDisplay.replace(/_3/g, '下午一、二节');
-	timeDisplay=timeDisplay.replace(/_4/g, '下午三、四节');
-	timeDisplay=timeDisplay.replace(/_5/g, '晚上一、二节');
 	timeDisplay=timeDisplay.replace(/1/g, '周一');
 	timeDisplay=timeDisplay.replace(/2/g, '周二');
 	timeDisplay=timeDisplay.replace(/3/g, '周三');
 	timeDisplay=timeDisplay.replace(/4/g, '周四');
 	timeDisplay=timeDisplay.replace(/5/g, '周五');
-	timeDisplay=timeDisplay.replace(/&/g, '<br><hr />');
+	timeDisplay=timeDisplay.replace(/&/g, '<br><hr/>');
 	
 	document.getElementById('opTable').style.display='none';
 	document.getElementById('hidden').style.display='';
@@ -135,16 +116,14 @@ function submit_clicked(){//提交按钮点击效应
 	var begin_time = $('#ee').combobox('getText').replace(/^\s*|\s*$/g,"");
 	var end_time = $('#ff').combobox('getText').replace(/^\s*|\s*$/g,"");
 	var week = $('#gg').combobox('getText').replace(/^\s*|\s*$/g,"");
+
 	var openTime='',id='check';
-	for(var i=1;i<=5;i++){
-		for(var j=1;j<=5;j++){
-			id=id+i+'_'+j;
+	for(var i=1;i<=5;i++){	
+			id=id+i;
 			if(document.getElementById(id).checked==true){
-				IF_CHECKBOX_CLICKED=1;
-				openTime=openTime+j+'_'+i+'@';//这里用@ 避免与ajax提交分隔符的冲突
+				openTime=openTime+i+'@';
 			}
 			id='check';
-		}
 	}
 	
 	var xmlhttp;
@@ -503,7 +482,7 @@ function add_experiment(){
 	
 	row = document.createElement('tr');
 	row.align = 'center';
-	row.style.background='yellow';
+	row.style.background='lightgreen';
 	table.appendChild(row);
 	
 	col0 = document.createElement('td');
@@ -527,7 +506,6 @@ function add_experiment(){
 	row.appendChild(col8);
 	
 	document.getElementById("save").style.display='';
-	document.getElementById("_NO_").style.display='';
 	document.getElementById("_NAME_").style.display='';
 	document.getElementById("_TURNAL_").style.display='';
 	document.getElementById("_LABORATORY_").style.display='';
@@ -537,7 +515,6 @@ function add_experiment(){
 	document.getElementById("_LIMIT_").style.display='';
 	
 	col0.appendChild(document.getElementById("save"));
-	col1.appendChild(document.getElementById("_NO_"));
 	col2.appendChild(document.getElementById("_NAME_"));
 	col3.appendChild(document.getElementById("_TURNAL_"));
 	col4.appendChild(document.getElementById("_LABORATORY_"));
@@ -549,12 +526,11 @@ function add_experiment(){
 }
 //====================================================================
 function save_experiment(){
-	var no,name,turnal,laboratory,teacher,time,status,limit;
+	var name,turnal,laboratory,teacher,time,status,limit;
 	var obj,index; 
 	
 	obj=document.getElementById("_NO_");
 	index=obj.selectedIndex;
-	no = obj.options[index].text.replace(/^\s*|\s*$/g,""); 
 	
 	name = document.getElementById("_NAME_").value.replace(/^\s*|\s*$/g,""); 
 	name =  encodeURI(encodeURI(name));
@@ -604,7 +580,7 @@ function save_experiment(){
 				alert('数据库存储失败，请刷新后重试');
 	    }
 	};
-	xmlhttp.open("GET","../server/admin/experiment/insert_experiment.jsp?no="+no+"&name="+name+"&turnal="+turnal+"&laboratory="+laboratory+"&teacher="+teacher+"&time="+time+"&status="+status+"&limit="+limit+"&p="+Math.random(),true);
+	xmlhttp.open("GET","../server/admin/experiment/insert_experiment.jsp?name="+name+"&turnal="+turnal+"&laboratory="+laboratory+"&teacher="+teacher+"&time="+time+"&status="+status+"&limit="+limit+"&p="+Math.random(),true);
 	xmlhttp.send();
 }
 
@@ -620,27 +596,11 @@ function remove_experiment(){
 		}
 	}
 	if(i==20){
-		alert('请先选中要删除的实验室');
+		alert('请先选中要删除的实验');
 		return;
 	}
-	var no,name,turnal,laboratory,teacher,time,status,limit;
+	var no;
 	no=document.getElementById("spanNo"+i).innerHTML.replace(/^\s*|\s*$/g,"");	
-	name = document.getElementById("spanName"+i).innerHTML.replace(/^\s*|\s*$/g,""); 
-	name =  encodeURI(encodeURI(name));
-	turnal = document.getElementById("spanTurnal"+i).innerHTML.replace(/^\s*|\s*$/g,"");
-	laboratory = document.getElementById("spanLaboratory"+i).innerHTML.replace(/^\s*|\s*$/g,""); 
-	laboratory =  encodeURI(encodeURI(laboratory));
-	teacher = document.getElementById("spanTeacher"+i).innerHTML.replace(/^\s*|\s*$/g,""); 
-	teacher =  encodeURI(encodeURI(teacher));
-	time = document.getElementById("spanTime"+i).innerHTML.replace(/^\s*|\s*$/g,""); 
-	time =  encodeURI(encodeURI(time));
-	status = document.getElementById("spanStatus"+i).innerHTML.replace(/^\s*|\s*$/g,""); 
-	if(status=='已发布')
-		status='1';
-	else
-		status='0';
-	limit = document.getElementById("spanLimit"+i).innerHTML.replace(/^\s*|\s*$/g,""); 
-
 	var xmlhttp;
 	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -657,7 +617,7 @@ function remove_experiment(){
 				alert('数据库存储失败，请刷新后重试');
 	    }
 	};
-	xmlhttp.open("GET","../server/admin/experiment/delete_experiment.jsp?no="+no+"&name="+name+"&turnal="+turnal+"&laboratory="+laboratory+"&teacher="+teacher+"&time="+time+"&status="+status+"&limit="+limit+"&p="+Math.random(),true);
+	xmlhttp.open("GET","../server/admin/experiment/delete_experiment.jsp?no="+no+"&p="+Math.random(),true);
 	xmlhttp.send();
 }
 

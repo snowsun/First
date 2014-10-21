@@ -59,7 +59,7 @@ public class DB_baseInfo {
 					checkSql = "select * from baseInfo where id='" + id + "'";
 					res = stmt.executeQuery(checkSql);
 					if (!res.next()) {
-						sql = "insert into baseInfo values('" + id + "','" + psw + "','" + name + "'," + flag + ")";
+						sql = "insert into baseInfo values('" + id + "','" + psw + "','" + name + "'," + flag + ",'zero')";
 						stmt.executeUpdate(sql);
 					}
 				} else {
@@ -102,13 +102,76 @@ public class DB_baseInfo {
 		}
 	}
 
+	/*** 根据id取回信息 ***/
+	// =====================================================================
+	public String[] get_info_by_id(String id) {
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet res = null;
+		String info[] = new String[5];
+		info[0] = "failed";
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch (Exception ex) {
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+
+		String sql = "select * from baseInfo where id='"+id+"'";
+		try {
+			res = stmt.executeQuery(sql);
+			while (res.next()) {
+				info[0] = res.getString(1).trim();
+				info[1] = res.getString(2).trim();
+				info[2] = res.getString(3).trim();
+				info[3] = res.getString(4).trim();
+				info[4] = res.getString(5).trim();
+			}
+			con.close();
+			stmt.close();
+			return info;
+
+		} catch (SQLException e) {
+			return info;
+		}
+	}
+	
+	/*** 插入学生选课信息***/
+	// =====================================================================
+	public boolean add_course_info(String userID,String course) {
+		Connection con = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch (Exception ex) {
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+
+		String sql = "update baseInfo set mark='"+course+"' where id='"+userID+"'";
+		System.out.println(sql);
+		try {
+			stmt.executeUpdate(sql);
+			con.close();
+			stmt.close();
+			return true;
+
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+	
 	/*** 取回基本信息表 ***/
 	// =====================================================================
 	public String[][] fetch_teacher() {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet res = null;
-		String info[][] = new String[50][4];
+		String info[][] = new String[50][5];
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
@@ -127,6 +190,7 @@ public class DB_baseInfo {
 				info[i][1] = res.getString(2).trim();
 				info[i][2] = res.getString(3).trim();
 				info[i][3] = res.getString(4).trim();
+				info[i][4] = res.getString(5).trim();
 				i++;
 			}
 			info[i][0] = "over";
@@ -140,7 +204,9 @@ public class DB_baseInfo {
 		}
 		return info;
 	}
+	
 
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// 返回用户类型(1是管理员,2是学生,3是老师)
 	public int getUserType(String userID) {
 
@@ -158,7 +224,6 @@ public class DB_baseInfo {
 		}
 
 		String sql = "select type from baseInfo where id = '" + userID + "'";
-		System.out.println(sql);
 		try {
 			res = stmt.executeQuery(sql);
 			if (res.next()) {

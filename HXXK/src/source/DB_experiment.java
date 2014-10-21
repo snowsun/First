@@ -25,7 +25,7 @@ public class DB_experiment {
 			ex.printStackTrace();
 		}
 		
-		String sql = "select * from experiment order by NO asc";
+		String sql = "select * from experiment order by NAME asc";
 		try {
 			res= stmt.executeQuery(sql);
 			int i = 0 ;
@@ -83,7 +83,7 @@ public class DB_experiment {
 	}
 	
 	/***删除实验室信息***///=====================================================================
-	public int dalete_experiment(String no,String name,String turnal,String laboratory,String teacher,String time,String status,String limit){
+	public int dalete_experiment(String no){
 		Connection con=null;
 		Statement stmt=null;
 		int flag = 1 ;
@@ -98,7 +98,7 @@ public class DB_experiment {
 			System.out.println("连接失败");
 			ex.printStackTrace();
 		}
-		String sql = "delete from experiment where no="+no+" and name='"+name+"' and turnal="+turnal+" and laboratory='"+laboratory+"' and teacher='"+teacher+"' and time='"+time+"' and status="+status+" and limit="+limit;     
+		String sql = "delete from experiment where no="+no;
 		try {
 			stmt.executeUpdate(sql);
 			con.close();

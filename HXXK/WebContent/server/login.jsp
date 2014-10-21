@@ -9,10 +9,12 @@
 		int flag = new DB_baseInfo().getUserType(username);
 		if(flag==1){
 			out.write("admin");
+			session.setAttribute("userType", "admin");
 	 		session.setAttribute("userID", username);
 		}
 		else if(flag==2){
 			out.write("stu");
+			session.setAttribute("userType", "stu");
 			session.setAttribute("userID", username);
 		}
 		else{
