@@ -7,7 +7,6 @@
 	String end_time=request.getParameter("end_time").toString();
 	String week=request.getParameter("week").toString();
 	String openTime = request.getParameter("openTime").toString();
-//	System.out.println(year+"\n"+lab_no+"\n"+begin_time+"\n"+end_time+"\n"+week+"\n"+openTime);
 	int fl = new DB_config().update_config(year, lab_no, begin_time, end_time, week,openTime);
 	if(fl==1)
 		out.write("success");

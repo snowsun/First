@@ -383,6 +383,41 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		//col-2
 		span = document.createElement('span');
 		span.id='spanName'+i;
+		span.style.cursor='hand';
+		
+		/******这个地方的冗杂是水平有限的无奈之举*********/
+		
+		if(i==0)   span.onclick= function(){checkClicked(0);};			/////////////////////////////////////////////////////////
+		if(i==1)   span.onclick= function(){checkClicked(1);};
+		if(i==2)   span.onclick= function(){checkClicked(2);};
+		if(i==3)   span.onclick= function(){checkClicked(3);};
+		if(i==4)   span.onclick= function(){checkClicked(4);};
+		if(i==5)   span.onclick= function(){checkClicked(5);};
+		if(i==6)   span.onclick= function(){checkClicked(6);};
+		if(i==7)   span.onclick= function(){checkClicked(7);};
+		if(i==8)   span.onclick= function(){checkClicked(8);};
+		if(i==9)   span.onclick= function(){checkClicked(9);};
+		if(i==10)  span.onclick= function(){checkClicked(10);};
+		if(i==11)  span.onclick= function(){checkClicked(11);};
+		if(i==12)  span.onclick= function(){checkClicked(12);};
+		if(i==13)  span.onclick= function(){checkClicked(13);};
+		if(i==14)  span.onclick= function(){checkClicked(14);};
+		if(i==15)  span.onclick= function(){checkClicked(15);};
+		if(i==16)  span.onclick= function(){checkClicked(16);};
+		if(i==17)  span.onclick= function(){checkClicked(17);};
+		if(i==18)  span.onclick= function(){checkClicked(18);};
+		if(i==19)  span.onclick= function(){checkClicked(19);};
+		if(i==20)  span.onclick= function(){checkClicked(20);};
+		if(i==21)  span.onclick= function(){checkClicked(21);};
+		if(i==22)  span.onclick= function(){checkClicked(22);};
+		if(i==23)  span.onclick= function(){checkClicked(23);};
+		if(i==24)  span.onclick= function(){checkClicked(24);};
+		if(i==25)  span.onclick= function(){checkClicked(25);};
+		if(i==26)  span.onclick= function(){checkClicked(26);};
+		if(i==27)  span.onclick= function(){checkClicked(27);};
+		if(i==28)  span.onclick= function(){checkClicked(28);};
+		if(i==29)  span.onclick= function(){checkClicked(29);};
+		
 		span.innerHTML = info_col[1];
 		col2.appendChild(span);
 		//col-3
@@ -473,7 +508,7 @@ function onloading_experiment(){//页面载入加载函数;
 }
 
 //====================================================================
-function add_experiment(){
+function add_experiment(){//添加实验
 	$('#add').linkbutton('disable');
 	$('#sub').linkbutton('disable');
 	
@@ -525,7 +560,7 @@ function add_experiment(){
 	
 }
 //====================================================================
-function save_experiment(){
+function save_experiment(){//保存新添加的实验课程
 	var name,turnal,laboratory,teacher,time,status,limit;
 	var obj,index; 
 	
@@ -585,7 +620,7 @@ function save_experiment(){
 }
 
 //====================================================================
-function remove_experiment(){
+function remove_experiment(){//删除实验
 	var id;
 	var i=0;
 	for(; i<20 ; i++){
@@ -621,13 +656,68 @@ function remove_experiment(){
 	xmlhttp.send();
 }
 
+//====================================================================
+function checkClicked(str){//点击课程名称弹出备注修改框，触发
+	var no;
+	document.getElementById('hidden_id').innerHTML=document.getElementById("spanNo"+str).innerHTML;
+	no=document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,"");	
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库读取失败，请刷新后重试');
+			else if(flag=='DO_NOT_EXIST'){
+				$('#dialog').dialog('setTitle',document.getElementById("spanName"+str).innerHTML);
+				$('#dialog').window('open');
+				document.getElementById('ta').innerHTML='您还没有对该课程添加备注,说点什么吧......';
+			}
+			else{
+				$('#dialog').dialog('setTitle',document.getElementById("spanName"+str).innerHTML);
+				$('#dialog').window('open');
+				document.getElementById('ta').innerHTML=flag;
+			}
+				
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/expMark/fetch_expMark.jsp?no="+no+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
 
-
-
-
-
-
-
+//====================================================================
+function save_mark(){//点击保存备注按钮，触发
+	var no=document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,"");	
+	var mark = document.getElementById('ta').innerHTML.replace(/^\s*|\s*$/g,"");	
+	mark = encodeURI(encodeURI(mark));
+	
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库读取失败，请刷新后重试');
+			else{
+				document.getElementById('ta').disabled=true;
+				alert('备注成功保存！');
+			}
+				
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/expMark/refresh_expMark.jsp?no="+no+"&mark="+mark+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
 
 
 

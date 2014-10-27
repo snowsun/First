@@ -138,7 +138,7 @@ public class DB_baseInfo {
 		}
 	}
 	
-	/*** 插入学生选课信息***/
+	/*** 插入、清除学生选课信息***/
 	// =====================================================================
 	public boolean add_course_info(String userID,String course) {
 		Connection con = null;

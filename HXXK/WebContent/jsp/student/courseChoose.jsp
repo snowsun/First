@@ -9,7 +9,9 @@
 	</head>
 	<body style="background-color:lightgreen;font-family:'微软雅黑';" onLoad="onloading_courseChoose()">
 		<a id="add"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onClick="refresh()">刷新页面/重新选课</a>  
+		<a id="ok"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onClick="submit()">提交选课信息</a>  
 		
+		Tips：学生可以通过点击对应课程的名称查看该课程的相关备注
 		<hr />
 		
 		<center>
@@ -42,11 +44,28 @@
 				</tr>
 			</table>	
 		</center>
-		<hr />
-		<a id="ok"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onClick="submit()">提交选课信息</a>  
-	
+		<hr />	
 		<span id="_NUM_" style="display:none;"></span>
 		<span id="_ROWS_" style="display:none;"></span>
+		
+		<!-- 备注输入框 -->
+		<div id="dialog" class="easyui-dialog" style="width:600px;height:300px"
+			data-options="title:'My Dialog',buttons:'#bb',modal:true,closed:true,
+			onClose:function(){document.getElementById('ta').disabled=true;},
+			toolbar:[{
+				text:'编辑',
+				iconCls:'icon-edit',
+				handler:function(){document.getElementById('ta').disabled='';}
+			}]">
+			<textarea id='ta' rows="14" cols="78" disabled></textarea>
+		</div>
+		<div id="bb">
+		<a href="#" class="easyui-linkbutton" onClick="$('#dialog').window('close');">关闭</a>
+		</div>
+		
+		<!-- BUFFER FOR MARK -->
+		<span id="hidden_id" style="display:none;"></span>
+		
 		
 	</body>
 </html>

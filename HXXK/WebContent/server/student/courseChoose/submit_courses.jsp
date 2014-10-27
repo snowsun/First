@@ -47,7 +47,7 @@
  	}
  	//-2-session过期，重新登录
  	else{
- 		
+ 		out.write("outTime");
  	}
  	
  %>

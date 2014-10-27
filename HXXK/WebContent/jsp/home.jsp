@@ -41,16 +41,19 @@
 			</div>
 			<div title="课程管理" >
 				<a href="javascript:void(0)"  src="<%=basePath%>jsp/config.jsp" class="cs-navi-tab">
-  					<button class="cs-link">STEP1.全局信息设置</button>
+  					<button class="cs-link" title="点击可以打开或刷新页面">1.全局信息设置</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/laboratory.jsp" class="cs-navi-tab">
-  					<button class="cs-link">STEP2.实验室信息设置</button>
+  					<button class="cs-link" title="点击可以打开或刷新页面">2.实验教室设置</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/experiment.jsp" class="cs-navi-tab">
-  					<button class="cs-link">STEP3.实验信息设置</button>
+  					<button class="cs-link" title="点击可以打开或刷新页面">3.实验信息设置</button>
   				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">选课情况查看</button>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/chooseForStu.jsp" class="cs-navi-tab">
+  					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">手动为学生选课</button>
+  				</a><br>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/checkChoose.jsp" class="cs-navi-tab">
+  					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">选课情况查看</button>
   				</a><br>
 			</div>
 			<div title="用户管理" >

@@ -215,6 +215,87 @@ public class DB_mainInfo {
 	}
 	
 	
+	/***获取选课学生信息***///=====================================================================
+	public String get_student_list_by_id_and_t(String no , String t){
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet res = null;
+		String list="";
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK","sa","131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		String colName = "LAB"+t+"_LIST";
+		String sql = "select "+colName+" from mainInfo where NO='"+no+"'";
+		try {
+			res= stmt.executeQuery(sql);
+			if(res.next()){
+				list = res.getString(1).toString().trim();				
+			}
+			res.close();
+			con.close();
+			stmt.close();	
+			return list;
+		} catch (SQLException e) {
+			//数据库操作失败
+			return "failed";
+		}	
+	}
+	/***将学生选课信息从表中删除***///=====================================================================
+	public boolean remove_one_record(String userID , String c_id , String c_t){
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet res = null;
+		int now_num;
+		String list="";
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK","sa","131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		String col_num = "LAB"+c_t+"_NUM" , col_list = "LAB"+c_t+"_LIST";
+		String sql = "select "+col_num+","+col_list+" from mainInfo where NO='"+c_id+"'";
+		try {
+			res= stmt.executeQuery(sql);
+			if(res.next()){
+				now_num = Integer.parseInt(res.getString(1).toString().trim())-1;
+				list = res.getString(2).toString().trim();
+				if(list.contains(userID)){
+					list = list.replace(userID+"#", "");
+					sql = "update mainInfo set "+col_num+"="+now_num+","+col_list+"='"+list+"' where NO='"+c_id+"'";
+					stmt.executeUpdate(sql);
+				}	
+				
+			}
+			else{
+				res.close();
+				con.close();
+				stmt.close();	
+				return false;
+			}			
+			res.close();
+			con.close();
+			stmt.close();	
+			return true;
+		} catch (SQLException e) {
+			//数据库操作失败
+			return false;
+		}	
+	}
+	
 	
 	public static void main(String []args){	
 	//	new DB_mainInfo().add_one_record("111220106", "30492152", "2");

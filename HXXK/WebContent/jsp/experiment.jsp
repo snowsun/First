@@ -8,7 +8,6 @@
 		<title>课程信息设置</title>
 	</head>
 	<body style="background-color:lightgreen;font-family:'微软雅黑';" onLoad="onloading_experiment()">
-	
 		<center>
 			<div id="btn">
 			<a id="add"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-add'" onClick="add_experiment()">增加实验</a>  
@@ -45,7 +44,7 @@
 					</td>
 				</tr>
 			</table>	
-		</center>
+		</center><br>管理员可以通过点击实验名称，添加、修改实验说明！
 		
 		<!-- 试验编号 -->
 		<span id='_ID_'></span>
@@ -95,6 +94,26 @@
 				}
 			%>		
 		</select>
+		
+		<!-- 备注输入框 -->
+		<div id="dialog" class="easyui-dialog" style="width:600px;height:300px"
+			data-options="title:'My Dialog',buttons:'#bb',modal:true,closed:true,
+			onClose:function(){document.getElementById('ta').disabled=true;},
+			toolbar:[{
+				text:'编辑',
+				iconCls:'icon-edit',
+				handler:function(){document.getElementById('ta').disabled='';}
+			}]">
+			<textarea id='ta' rows="14" cols="78" disabled></textarea>
+		</div>
+		<div id="bb">
+		<a href="#" class="easyui-linkbutton" onClick="save_mark()">保存</a>
+		<a href="#" class="easyui-linkbutton" onClick="$('#dialog').window('close');">关闭</a>
+		</div>
+		
+		<!-- BUFFER FOR MARK -->
+		<span id="hidden_id" style="display:none;"></span>
+	
 	</body>
 </html>
 
