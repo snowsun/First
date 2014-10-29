@@ -55,7 +55,7 @@ $(function() {
 	$('.cs-navi-tab').click(function() {
 		var $this = $(this);
 		var href = $this.attr('src');
-		var title = $this.text();
+		var title = $this.text().replace(/^\s*|\s*$/g,"");
 		addTab(title, href);
 	});
 });

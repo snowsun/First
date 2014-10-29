@@ -9,7 +9,10 @@
 		<link rel="stylesheet" href="../css/login.css"/>
 		<title>南京大学化学实验教学中心 </title>
 	</head>
-	<body  onLoad="onLoading()" style="background-color:lightblue"> 	
+	<body  onLoad="onLoading()" style="background-color:lightblue">
+		<%
+			session.invalidate();
+		%>	
 		<div class="title" id="face">
 			<img src="../image/login/22.png">
 			<img src="../image/login/33.png">

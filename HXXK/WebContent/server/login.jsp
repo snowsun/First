@@ -17,6 +17,12 @@
 			session.setAttribute("userType", "stu");
 			session.setAttribute("userID", username);
 		}
+		else if(flag==3){
+			System.out.println(username);
+			out.write("tea");
+			session.setAttribute("userType", "tea");
+			session.setAttribute("userID", username);
+		}
 		else{
 			out.write("loginFailed");
 		}

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="common/common.jsp" %>
+<%@include file="../common/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>主界面</title>
+<title>教师主界面</title>
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/system/home.css">
 <!-- js -->
@@ -15,12 +15,19 @@
 <script type="text/javascript" src="<%=basePath%>js/easyUI/plugins/jquery.tabs.js"></script>
 
 <script type="text/javascript">
-	var SESSION_ID = "<%=request.getSession().getAttribute("userID") %>";
-	var SESSION_TYPE = "<%=request.getSession().getAttribute("userType") %>";
-	if(SESSION_ID=='null' || SESSION_TYPE!='admin'){
-		window.location.href='login.jsp';
+	var userID = <%=session.getAttribute("userID")%>;
+	var userType =  <%=session.getAttribute("userType")%>;
+	alert(userType);
+	if(!(userID!='null' && userType =='tea')){
+		window.location.href='../login.jsp';
 	}
 </script>
+<script type="text/javascript">
+	function returnLogin(){
+		window.location.href='../login.jsp';
+	}
+</script>
+
 
 </head>
 <body class="easyui-layout" onLoad="time()">
@@ -35,41 +42,26 @@
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/stuNotice.jsp" class="cs-navi-tab">
   					<button class="cs-link">查看公告</button>
   				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/updateNotice.jsp" class="cs-navi-tab">
-  					<button class="cs-link">发布新公告</button>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacher/teaMark.jsp" class="cs-navi-tab">
+  					<button class="cs-link">教师简介</button>
+  				</a><br>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacher/editMark.jsp" class="cs-navi-tab">
+  					<button class="cs-link">发布简介</button>
   				</a><br>
 			</div>
 			<div title="课程管理" >
-				<a href="javascript:void(0)"  src="<%=basePath%>jsp/config.jsp" class="cs-navi-tab">
-  					<button class="cs-link" title="点击可以打开或刷新页面">1.全局信息设置</button>
-  				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/laboratory.jsp" class="cs-navi-tab">
-  					<button class="cs-link" title="点击可以打开或刷新页面">2.实验教室设置</button>
-  				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/experiment.jsp" class="cs-navi-tab">
-  					<button class="cs-link" title="点击可以打开或刷新页面">3.实验信息设置</button>
-  				</a><br>
-  				<a href="javascript:void(0)" title="cfs" src="<%=basePath%>jsp/chooseForStu.jsp" class="cs-navi-tab">
-  					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">手动为学生选课</button>
-  				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/checkChoose.jsp" class="cs-navi-tab">
-  					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">选课情况查看</button>
+				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacher/teaStuList.jsp" class="cs-navi-tab">
+  					<button class="cs-link">查看学生信息</button>
   				</a><br>
 			</div>
 			<div title="用户管理" >
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/studentInfo.jsp" class="cs-navi-tab">
-  					<button class="cs-link">学生信息</button>
-  				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacherInfo.jsp" class="cs-navi-tab">
-  					<button class="cs-link">教师信息</button>
-  				</a><br>
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/userList.jsp" class="cs-navi-tab">
-  					<button class="cs-link">用户查询</button>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/stuRePassword.jsp" class="cs-navi-tab">
+  					<button class="cs-link">修改密码</button>
   				</a><br>
 			</div>
 			<div title="系统功能" >
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">退出</button>
+  					<button class="cs-link" onClick="returnLogin()">退出</button>
   				</a><br>
 			</div>
 		</div>

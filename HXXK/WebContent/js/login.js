@@ -120,6 +120,8 @@ function log(str){
 					window.location.href="../jsp/home.jsp";
 				else if(flag=="stu")
 					window.location.href="../jsp/student/stuHome.jsp";
+				else if(flag=="tea")
+					window.location.href="../jsp/teacher/teaHome.jsp";
 				else{
 					alert('账号未激活或密码错误，请联系管理员');
 					document.getElementById('username').value='';

@@ -295,7 +295,69 @@ public class DB_mainInfo {
 			return false;
 		}	
 	}
-	
+	// 查找学生列表
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	public String[][] getStuList(String teacherID) {
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet res = null;
+		String info[][] = new String[5][14];
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch (Exception ex) {
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+
+		String sql = "select * from mainInfo where TEACHER like '" + teacherID + "-%'";
+		try {
+			res = stmt.executeQuery(sql);
+			int i = 0;
+			while (res.next()) {
+				// 实验名字NAME
+				info[i][0] = res.getString(2).trim();
+				// 实验室LABORATORY
+				info[i][1] = res.getString(4).trim();
+				// 老师TEACHER
+				info[i][2] = res.getString(5).trim();
+				// 时间TIME
+				info[i][3] = res.getString(6).trim();
+				// LAB1_NUM
+				info[i][4] = res.getString(9).trim();
+				// LAB1_LIST
+				info[i][5] = res.getString(10).trim();
+				// LAB2_NUM
+				info[i][6] = res.getString(11).trim();
+				// LAB2_LIST
+				info[i][7] = res.getString(12).trim();
+				// LAB3_NUM
+				info[i][8] = res.getString(13).trim();
+				// LAB3_LIST
+				info[i][9] = res.getString(14).trim();
+				// LAB4_NUM
+				info[i][10] = res.getString(15).trim();
+				// LAB4_LIST
+				info[i][11] = res.getString(16).trim();
+				// LAB5_NUM
+				info[i][12] = res.getString(17).trim();
+				// LAB5_LIST
+				info[i][13] = res.getString(18).trim();
+				i++;
+			}
+			info[i][0] = "over";
+			con.close();
+			stmt.close();
+			return info;
+
+		} catch (SQLException e) {
+			info[0][0] = "failed";
+			e.printStackTrace();
+			System.out.println("sql执行失败");
+		}
+		return info;
+	}
 	
 	public static void main(String []args){	
 	//	new DB_mainInfo().add_one_record("111220106", "30492152", "2");

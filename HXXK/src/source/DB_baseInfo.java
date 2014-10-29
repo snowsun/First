@@ -241,6 +241,153 @@ public class DB_baseInfo {
 
 	}
 
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// 获得所有用户信息
+		public String[][] getAllUserInfo() {
+
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet res = null;
+			String info[][] = new String[200][5];
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				ex.printStackTrace();
+			}
+
+			String sql = "select * from baseInfo  order by type asc ";
+			try {
+				res = stmt.executeQuery(sql);
+				int i = 0;
+				while (res.next()) {
+					info[i][0] = res.getString(1).trim();
+					info[i][1] = res.getString(2).trim();
+					info[i][2] = res.getString(3).trim();
+					info[i][3] = res.getString(4).trim();
+					info[i][4] = res.getString(5).trim();
+					i++;
+				}
+				info[i][0] = "over";
+				con.close();
+				stmt.close();
+				return info;
+
+			} catch (SQLException e) {
+				info[0][0] = "failed";
+				e.printStackTrace();
+				System.out.println("sql执行失败");
+			}
+			return info;
+		}
+
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// 返回备注信息(教师简介)
+		public String getMarkInfo(String userID) {
+
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet res = null;
+			String info = "failed";
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				ex.printStackTrace();
+			}
+
+			String sql = "select mark from baseInfo where id = '" + userID + "'";
+			System.out.println(sql);
+			try {
+				res = stmt.executeQuery(sql);
+				if (res.next()) {
+					info = res.getString(1).trim();
+				}
+				con.close();
+				stmt.close();
+			} catch (SQLException e) {
+				System.out.println("sql执行失败");
+				e.printStackTrace();
+			}
+
+			return info;
+
+		}
+
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// 发布教师简介
+		public boolean updateMarkInfo(String userID, String markInfo) {
+			boolean isSuccess = false;
+			Connection con = null;
+			Statement stmt = null;
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				ex.printStackTrace();
+			}
+
+			String sql = "update baseInfo set mark = '" + markInfo + "' where id = '" + userID + "'";
+			System.out.println(sql);
+			try {
+				stmt.executeUpdate(sql);
+				con.close();
+				stmt.close();
+				isSuccess = true; // 更新成功
+			} catch (SQLException e) {
+				e.printStackTrace();
+				isSuccess = false;
+			}
+			return isSuccess;
+		}
+
+		// 根据id找到id和姓名并返回"id-name"字符串,若找不到,返回"DATA_NULL",数据库错误返回"DATABASE_ERROR"
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		public String getIDAndName(String userID) {
+			boolean flag = true;
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet res = null;
+			String info = "";
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				flag = false;
+				ex.printStackTrace();
+			}
+
+			String sql = "select id , name from baseInfo where id = '" + userID + "'";
+			System.out.println(sql);
+			try {
+				res = stmt.executeQuery(sql);
+				if (res.next()) {
+					info = res.getString(1).trim() + "-" + res.getString(2).trim();
+				} else {
+					info = "DATA_NULL";
+				}
+				con.close();
+				stmt.close();
+			} catch (SQLException e) {
+				System.out.println("sql执行失败");
+				flag = false;
+				e.printStackTrace();
+			}
+
+			if (flag == false) {
+				info = "DATABASE_ERROR";
+			}
+
+			return info;
+		}
 	public static void main(String args[]) {
 
 	}

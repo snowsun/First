@@ -289,7 +289,9 @@ function submit(){
 			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
 			/*构造显示*/
 			if(flag=='success'){
-				alert('为该同学选课成功，请关闭此子窗口！');
+				alert('为该同学选课成功，该同学可以登录选课系统查看课程信息！');
+				window.parent.$('#tabs').tabs('close','手动为学生选课'); 
+				
 			}
 			else{
 				alert('数据库操作失败，这有可能是以下原因造成的：\n1.当前使用系统人数过多，推荐您在系统空闲时进行选课\n2.您选择的课程已经满员,请优先选择已选人数较少的课程\n');
