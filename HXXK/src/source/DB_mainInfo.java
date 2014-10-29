@@ -38,7 +38,7 @@ public class DB_mainInfo {
 		}	
 	}
 	
-	/***增加实验室信息***///=====================================================================
+	/***删除实验室信息***///=====================================================================
 	public int dalete_mainInfo(String no){
 		Connection con=null;
 		Statement stmt=null;
@@ -105,6 +105,61 @@ public class DB_mainInfo {
 				info[i][10] = res.getString(13).trim();
 				info[i][11] = res.getString(15).trim();
 				info[i][12] = res.getString(17).trim();
+				i++;
+			}
+			info[i][0] = "over";
+			con.close();
+			stmt.close();	
+			return info;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			info[0][0] = "failed";
+			return info;
+		}	
+	}
+	
+	/***取回所有实验信息***///=====================================================================
+	public String[][] fetch_AllmainInfo(){
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet res = null;
+		String info[][] = new String[50][18];
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK","sa","131317");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		
+		String sql = "select * from mainInfo order by LABORATORY asc";
+		try {
+			res= stmt.executeQuery(sql);
+			int i = 0 ;
+			while(res.next()){
+				info[i][0] = res.getString(1).trim();
+				info[i][1] = res.getString(2).trim();
+				info[i][2] = res.getString(3).trim();
+				info[i][3] = res.getString(4).trim();
+				info[i][4] = res.getString(5).trim();
+				info[i][5] = res.getString(6).trim();
+				info[i][6] = res.getString(7).trim();
+				info[i][7] = res.getString(8).trim();	
+				info[i][8] = res.getString(9).trim();
+				info[i][9] = res.getString(10).trim();
+				info[i][10] = res.getString(11).trim();
+				info[i][11] = res.getString(12).trim();
+				info[i][12] = res.getString(13).trim();
+				info[i][13] = res.getString(14).trim();
+				info[i][14] = res.getString(15).trim();
+				info[i][15] = res.getString(16).trim();
+				info[i][16] = res.getString(17).trim();
+				info[i][17] = res.getString(18).trim();
 				i++;
 			}
 			info[i][0] = "over";
@@ -361,5 +416,7 @@ public class DB_mainInfo {
 	
 	public static void main(String []args){	
 	//	new DB_mainInfo().add_one_record("111220106", "30492152", "2");
+		String i = null;
+		System.out.println();
 	}
 }

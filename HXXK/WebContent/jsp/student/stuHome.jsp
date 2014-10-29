@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../common/common.jsp" %>
+<%@ page import="source.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,13 +37,13 @@
 			</div>
 			<div title="课程管理" >
 				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/courseChoose.jsp" class="cs-navi-tab">
-  					<button class="cs-link">学期选课</button>
+  					<button id="chButton" class="cs-link">学期选课</button>
   				</a><br>
 				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/schedule.jsp" class="cs-navi-tab">
   					<button class="cs-link">我的课表</button>
   				</a><br>
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/rechoose.jsp" class="cs-navi-tab">
-  					<button class="cs-link">重新选课</button>
+  					<button id="reButton" class="cs-link">重新选课</button>
   				</a><br>
 			</div>
 			<div title="用户管理" >
@@ -71,5 +72,42 @@
     	<br>
     	<span style="font-family:'微软雅黑';">Copyright © 2014 南京大学化学与化工学院   All rights reserved</span> 
     </div>
+    
+    <%
+		String BEGIN_TIME =  new DB_config().fetch_config()[4];
+		String END_TIME =  new DB_config().fetch_config()[5];
+		int y,m,d,h,mi,s;    
+		java.util.Calendar cal=java.util.Calendar.getInstance();    
+		y=cal.get(java.util.Calendar.YEAR);    
+		m=cal.get(java.util.Calendar.MONTH)+1;    
+		d=cal.get(java.util.Calendar.DATE);
+		
+		String yy,mm,dd;
+		yy=y+"";
+		if(m<10) mm="0"+m;
+		else mm=m+"";
+		if(d<10) dd="0"+d;
+		else dd=d+"";
+		
+		String NOW_TIME = yy+"-"+mm+"-"+dd;
+		System.out.println(NOW_TIME);
+		if(NOW_TIME.compareTo(BEGIN_TIME)<0){
+			%>
+				<script type="text/javascript">
+					alert('选课系统尚未开启');
+					window.location.href='../login.jsp';
+				</script>
+			<%
+		}
+		else if(NOW_TIME.compareTo(END_TIME)>0){
+			%>
+			<script type="text/javascript">
+				document.getElementById('chButton').style.display='none';
+				document.getElementById('reButton').style.display='none';
+			</script>
+		<%
+		}
+	%>
+	
 </body>
 </html>

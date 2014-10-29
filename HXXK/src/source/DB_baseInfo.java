@@ -278,7 +278,6 @@ public class DB_baseInfo {
 			} catch (SQLException e) {
 				info[0][0] = "failed";
 				e.printStackTrace();
-				System.out.println("sql执行失败");
 			}
 			return info;
 		}

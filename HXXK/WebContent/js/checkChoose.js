@@ -172,12 +172,7 @@ function check_list(str){
 }
 
 //====================================================================
-function downloadSchedule(){//下载课表
-	document.getElementById('progress').style.display='';
-	document.getElementById('dwn').style.display='none';
-	document.getElementById('hs').innerHTML='正在处理请稍后......';
-	send();
-	
+function downloadSchedule(){//下载课表	
 	//传入后台进行课表的下载
 	var xmlhttp;
 	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -189,11 +184,15 @@ function downloadSchedule(){//下载课表
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
-			alert(flag);
 	    }
 	};
 	xmlhttp.open("GET","../server/admin/checkChoose/downloadSchedule.jsp?p="+Math.random(),true);
 	xmlhttp.send();
+	
+	document.getElementById('progress').style.display='';
+	document.getElementById('dwn').style.display='none';
+	document.getElementById('hs').innerHTML='正在处理请稍后......';
+	send();
 }
 
 function send(){ 
