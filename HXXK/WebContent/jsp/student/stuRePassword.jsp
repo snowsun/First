@@ -8,7 +8,7 @@
 <!-- js -->
 <script type="text/javascript" src="<%=basePath%>js/student/stuRePassword.js"></script>
 </head>
-<body style="background:green">
+<body style="background:lightgreen">
 <center>
 <div class="easyui-panel" title="密码修改" style="width:500px;padding:10px 60px 20px 60px">
         <table style="font-family:楷体;font-size:10px;">

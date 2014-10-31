@@ -258,7 +258,7 @@ public class DB_baseInfo {
 				ex.printStackTrace();
 			}
 
-			String sql = "select * from baseInfo  order by type asc ";
+			String sql = "select * from baseInfo  order by id asc ";
 			try {
 				res = stmt.executeQuery(sql);
 				int i = 0;

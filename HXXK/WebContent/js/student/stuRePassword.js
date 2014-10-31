@@ -10,10 +10,16 @@ $(document).ready(function(){
 		var oldPassword = $('#oldPassword').val();
 		var newPassword = $('#newPassword').val();
 		var newPasswordAffirm = $('#newPasswordAffirm').val();
+		
+		if( newPassword.length<=3){
+			alert('新密码长度过短,请重新填写！');
+			return;
+		}
 		if(newPassword!=newPasswordAffirm){
 			alert("新密码两次输入的值不匹配");
 			return;
 		}
+		
 		var xmlhttp;
 		if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 			xmlhttp=new XMLHttpRequest();

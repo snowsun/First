@@ -8,18 +8,21 @@
 <script type="text/javascript" src="<%=basePath%>js/teacher/teaStuList.js"></script>
 </head>
 <body onLoad = "searchData()" style="background:lightgreen">
-	<span id="teacherID"><%=session.getAttribute("userID")%></span>
-	<TABLE style="font-size: 9px; font-family: Arial; table-layout: fixed; width: 100%; height: 90%;">
-		<TR>
-			<TD width="86%" valign="top" style="border-left: #7BAED5 solid 0px; padding-left: 2px">
-				<hr>
-				<table border="1" id="stuList" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
-				<tr style="background:lightblue">
-					<td>实验室名称</td><td>实验室</td><td>老师</td><td>时间</td><td>第一期</td><td>第二期</td><td>第三期</td><td>第四期</td><td>第五期</td>
-				</tr>
-				</table>
-			</TD>
-		</TR>
-	</TABLE>
+	<span id="teacherID" style="display:none;"><%=session.getAttribute("userID")%></span>
+	<table border="1" id="stuList" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
+		<tr id="ttitle" align="center" style="color:DimGray;border-style:Solid;background:Silver">
+		<td>实验室名称</td><td>实验室</td><td>老师</td><td>时间</td>
+		</tr>
+	</table>
+	
+	<div id="dd" class="easyui-dialog" title="My Dialog" style="width:200px;height:300px;"   
+    	data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true,
+    		buttons:[{
+				text:'复制信息',
+				handler:function(){var v=document.getElementById('list').innerHTML;window.clipboardData.setData('text',v);alert('学生信息复制成功');}
+			}]">   
+	  		<span id="list"></span>
+	</div>  
+	
 </body>
 </html>
