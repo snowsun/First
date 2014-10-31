@@ -5,8 +5,6 @@
 <%@ page import="jxl.write.*" %>
 
 <%
-	System.out.println(1111);
-
 	WritableFont wf_title = new WritableFont(WritableFont.TIMES, 15, WritableFont.BOLD, false);
 	WritableFont wf_room = new WritableFont(WritableFont.TIMES, 10, WritableFont.BOLD, false);
 	WritableCellFormat title = new WritableCellFormat(wf_title);
@@ -46,9 +44,10 @@
 		out.write("error_1");
 	}
 	else{//解析数组下载excel课程表
-		javax.swing.filechooser.FileSystemView fsv = javax.swing.filechooser.FileSystemView.getFileSystemView(); 
-		String desktopPath = fsv.getHomeDirectory().toString();
-		WritableWorkbook book  =  Workbook.createWorkbook( new File(desktopPath+"\\综合化学课表.xls"));
+//		javax.swing.filechooser.FileSystemView fsv = javax.swing.filechooser.FileSystemView.getFileSystemView(); 
+//		String desktopPath = fsv.getHomeDirectory().toString();
+		String fileLocation = application.getRealPath("/");/////////////////////////////////******important
+		WritableWorkbook book  =  Workbook.createWorkbook( new File(fileLocation+"/scheduleLocation/Schedule.xls"));
         WritableSheet sheet  =  book.createSheet( "课表 " ,  0 );
         sheet.mergeCells(0,0,15,0);
         for(int j =1 ; j<800;j++){

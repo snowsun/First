@@ -45,9 +45,11 @@
 			}]">   
     		<span id="list"></span>
 		</div>  
-		<a id="dwn" title="点击可以导出课表至桌面位置" href="javascript:void(0)" onClick="downloadSchedule()">点击此处下载课表</a>
+		<a id="gen" title="点击可以导出课表至桌面位置" href="javascript:void(0)" onClick="downloadSchedule()">点击此处下载课表</a>
 		<div id="progress" class="easyui-progressbar" data-options="value:0" style="background-color:white;width:auto;display:none;"></div> 	
 		<span id="hs"></span>
+		<a id="dwn" href="../scheduleLocation/Schedule.xls" style="display:none;">课表生成成功,点击此处下载课表</a>
+		
 	</body>
 </html>
 

@@ -12,7 +12,7 @@
 		mySmartUpload.setDeniedFilesList("exe");//禁止上传类型
 		mySmartUpload.upload();//开始上传，放到内存中
 		File myFile = mySmartUpload.getFiles().getFile(0);//获取上传地址
-		String fileLocation = application.getRealPath("/");/////////////////////////////////******important
+		String fileLocation = application.getRealPath("/");//******important
 		/*
 			删除文件夹下所有已存在上传文件
 		*/

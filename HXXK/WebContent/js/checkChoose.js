@@ -184,13 +184,17 @@ function downloadSchedule(){//下载课表
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='error_0')
+				alert('Excel操作失败，请联系sunchun@smail.nju.edu.cn');
+			else if(flag=='error_1')
+				alert('数据库操作失败，请联系数据库管理员重启数据库');
 	    }
 	};
 	xmlhttp.open("GET","../server/admin/checkChoose/downloadSchedule.jsp?p="+Math.random(),true);
 	xmlhttp.send();
 	
 	document.getElementById('progress').style.display='';
-	document.getElementById('dwn').style.display='none';
+	document.getElementById('gen').style.display='none';
 	document.getElementById('hs').innerHTML='正在处理请稍后......';
 	send();
 }
@@ -198,13 +202,14 @@ function downloadSchedule(){//下载课表
 function send(){ 
 	var values = $('#progress').progressbar('getValue'); 
 	if(values<100){
-		values=values+5;
+		values=values+20;
 		$('#progress').progressbar({ 
 			value: values 
 		}); 
 	}
 	else{
-		document.getElementById('hs').innerHTML='课表已经成功导出至桌面，请查看';
+		document.getElementById('dwn').style.display='';
+		document.getElementById('hs').innerHTML='';
 		return;
 	}
     setTimeout("send();",1000);
