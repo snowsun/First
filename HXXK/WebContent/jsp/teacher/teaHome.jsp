@@ -52,6 +52,9 @@
 				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacher/teaStuList.jsp" class="cs-navi-tab">
   					<button class="cs-link">查看学生信息</button>
   				</a><br>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/teacher/set.jsp" class="cs-navi-tab">
+  					<button class="cs-link">设置与下载</button>
+  				</a><br>
 			</div>
 			<div title="用户管理" >
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/student/stuRePassword.jsp" class="cs-navi-tab">

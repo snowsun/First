@@ -1,0 +1,15 @@
+/*上方面板css*/
+.cs-north {
+	width:100%;
+	height:152px;
+	background-color:#00cc99;
+}
+/*logo css*/
+div.title{
+	height:150px;
+	width:1200px;
+	background-image:url(../../image/system/2.png); 
+}
+
+h1 {font-size: 12px; display : inline}
+tr {border-style:solid;}

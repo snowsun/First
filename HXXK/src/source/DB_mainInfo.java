@@ -414,9 +414,48 @@ public class DB_mainInfo {
 		return info;
 	}
 	
+	// 查找老师实验信息
+		// =====================================================================================================
+		public String[][] getInfoByTeaID(String teacherID) {
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet res = null;
+			String info[][] = new String[5][8];
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				ex.printStackTrace();
+			}
+
+			String sql = "select * from mainInfo where TEACHER like '" + teacherID + "-%'";
+			try {
+				res = stmt.executeQuery(sql);
+				int i = 0;
+				while (res.next()) {
+					info[i][0] = res.getString(1).trim();
+					info[i][1] = res.getString(2).trim();
+					info[i][2] = res.getString(3).trim();
+					info[i][3] = res.getString(4).trim();
+					info[i][4] = res.getString(5).trim();
+					info[i][5] = res.getString(6).trim();
+					info[i][6] = res.getString(7).trim();
+					info[i][7] = res.getString(8).trim();
+					i++;
+				}
+				info[i][0] = "over";
+				con.close();
+				stmt.close();
+				return info;
+
+			} catch (SQLException e) {
+				info[0][0] = "failed";
+				return info;
+			}
+		}
+	
 	public static void main(String []args){	
-	//	new DB_mainInfo().add_one_record("111220106", "30492152", "2");
-		String i = null;
-		System.out.println();
 	}
 }

@@ -12,7 +12,7 @@
 	<body onLoad="onLoading()"> 	
 		<div class="button">
 			<input type='button' id="button1" value="学期选课系统" style="font-family:'幼圆';font-size:70px;color:white;width:50%;height:99%;border-radius:40px;background-color:lightblue; cursor:hand" onClick="log('xuanke')" />
-			<input type='button' id="button2" value="作业提交系统" style="font-family:'幼圆';font-size:70px;color:white;width:49%;height:99%;border-radius:40px;background-color:lightgreen; cursor:hand"/>	
+			<input type='button' id="button2" value="作业提交系统" style="font-family:'幼圆';font-size:70px;color:white;width:49%;height:99%;border-radius:40px;background-color:lightgreen; cursor:hand" onClick="log('zuoye')"/>	
 		</div>
 	</body>
 </html>

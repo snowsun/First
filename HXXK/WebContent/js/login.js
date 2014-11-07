@@ -116,18 +116,12 @@ function log(str){
 		xmlhttp.onreadystatechange=function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
-//				if(flag=='admin')
-//					window.location.href="../jsp/home.jsp";
-//				else if(flag=="stu")
-//					window.location.href="../jsp/student/stuHome.jsp";
-//				else if(flag=="tea")
-//					window.location.href="../jsp/teacher/teaHome.jsp";
 				if(flag=='admin')
-					window.location.href="../jsp/chooseSys.jsp?admin";
+					window.location.href="../jsp/home.jsp";
+				else if(flag=="tea")
+					window.location.href="../jsp/teacher/teaHome.jsp";
 				else if(flag=="stu")
 					window.location.href="../jsp/chooseSys.jsp?stu";
-				else if(flag=="tea")
-					window.location.href="../jsp/chooseSys.jsp?tea";
 				else{
 					alert('账号未激活或密码错误，请联系管理员');
 					document.getElementById('username').value='';
@@ -154,6 +148,10 @@ function log(str){
 			window.location.href="../jsp/login.jsp";
 		}
 	}
-	else if(str=='zuoye')
-		window.location.href="submit.jsp";
+	else if(str=='zuoye'){
+		var url = location.search;
+		var type = url.split("?")[1];
+		if(type=='stu')
+			window.location.href="../jsp/test.jsp?stu";
+	}
 }
