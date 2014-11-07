@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	var userID = <%=session.getAttribute("userID")%>;
 	var userType =  <%=session.getAttribute("userType")%>;
-	if(!(userID!='null' && userType =='tea')){
+	if(userType !='tea'){
 		window.location.href='../login.jsp';
 	}
 </script>

@@ -693,7 +693,7 @@ function checkClicked(str){//点击课程名称弹出备注修改框，触发
 //====================================================================
 function save_mark(){//点击保存备注按钮，触发
 	var no=document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,"");	
-	var mark = document.getElementById('ta').innerHTML.replace(/^\s*|\s*$/g,"");	
+	var mark = document.getElementById('ta').value.replace(/^\s*|\s*$/g,"");	
 	mark = encodeURI(encodeURI(mark));
 	
 	var xmlhttp;

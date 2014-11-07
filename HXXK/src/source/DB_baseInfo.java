@@ -129,6 +129,7 @@ public class DB_baseInfo {
 				info[3] = res.getString(4).trim();
 				info[4] = res.getString(5).trim();
 			}
+			res.close();
 			con.close();
 			stmt.close();
 			return info;
