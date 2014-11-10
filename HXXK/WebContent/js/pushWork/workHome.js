@@ -16,7 +16,15 @@ function onloading(){
 		xmlhttp.onreadystatechange=function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
-				Dis_Stu(flag);
+				if(flag=='no_choose'){
+					alert('对不起您暂未选课，请到管理员处参加选课');
+				}
+				else if(flag=='failed'){
+					alert('对不起，数据库访问出错，请稍后访问，若一直不能访问，请联系数据库管理员');
+				}
+				else{
+					Dis_Stu(flag);
+				}
 		    }
 		};
 		xmlhttp.open("GET","../server/pushWork/push_work.jsp?id="+id+"&type="+type+"&p="+Math.random(),true);
@@ -93,13 +101,56 @@ function Dis_Stu(str){
 		//col-7
 		var a = document.createElement('a');
 		a.href='javascript:void(0)';
-		a.id='a'+i;
+		a.value=i;
 		a.innerHTML = "提交";	
+		a.onclick= function(){pushWork(this);};
 		
 		var f = document.createElement('input');
 		f.type='file';
+		f.name='file';
+		f.id='file'+i;
 		col7.appendChild(f);
 		col7.appendChild(a);
+		
+		//col-8
+		var ifPushed = info_col[6];
+		if(ifPushed == 'yes')
+			col8.style.background='darkgreen';
+		
 	}
+	
+}
+
+function pushWork(str){
+	var i = str.value;
+	var ext = document.getElementById("file"+i).value.replace(/^\s*|\s*$/g,"").split('.')[1];
+	if(ext!='pdf' && ext!='PDF' && ext!='doc' && ext!='docx' && ext!='DOC' && ext!='DOCX'){
+		alert('上传文件类型不符合类型要求');
+		return;
+	}
+	
+	var DDL = document.getElementById("spanDDL"+i).innerHTML.replace(/^\s*|\s*$/g,"");
+	if(DDL=='未开放提交'){
+		alert('本次作业提交暂未开放，请耐心等待');
+		return;
+	}
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	if(month<10) month='0'+month;
+	var day = date.getDate();
+	if(day<10) day='0'+day;
+	var nowTime = year+'-'+month+'-'+day;
+	if(nowTime>DDL){
+		alert('抱歉，已过本次作业的提交截止日期，无法提交作业');
+		return;
+	}
+	var courseID = document.getElementById("spanNo"+i).innerHTML.replace(/^\s*|\s*$/g,"");
+	var courseT = document.getElementById("spanT"+i).innerHTML.replace(/^\s*|\s*$/g,"");
+	document.getElementById("courseID").value = courseID;
+	document.getElementById("courseT").value = courseT;
+	document.getElementById("fileNo").value = i;
+	document.getElementById("form1").submit();
+	
 	
 }

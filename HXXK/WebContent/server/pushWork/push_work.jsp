@@ -5,7 +5,7 @@
 	String type = request.getParameter("type").toString();
 	
 	if(type.equals("stu")){
-		String DDL="2014-11-25";
+		String DDL="未开放提交";
 		String ABOUT_BASEINFO[] = new DB_baseInfo().get_info_by_id(id);
 		if(ABOUT_BASEINFO[0].equals("failed"))
 			out.write("failed");
@@ -28,8 +28,29 @@
 						else{
 								String t = get_t(info[i][0],C,len);
 								if(!t.equals("not")){//if have chosen this lab
-									temp = info[i][0]+"#"+info[i][1]+"#"+info[i][4].split("-")[1]+"#"+info[i][5]+"#"+t+"#"+DDL;
+									
+									int It = Integer.parseInt(t);
+									String DDLs[] = new String[5];
+									DDLs = new DB_DDL().getDDLById(info[i][0]);
+									if(DDLs[0].equals("failed")){
+										out.write("failed");
+										return;
+									}
+									else if(!DDLs[0].equals("NotFound")){
+										DDL = DDLs[It-1];
+										if(DDL.equals("NoPublished"))
+											DDL="未开放提交";		
+									}
+									System.out.println(DDL);
+									
+									String if_pushed = new DB_pushStatus().if_pushed(id, info[i][0], t);
+									if(if_pushed.equals("failed")){
+										out.write("failed");
+										return;
+									}
+									temp = info[i][0]+"#"+info[i][1]+"#"+info[i][4].split("-")[1]+"#"+info[i][5]+"#"+t+"#"+DDL+"#"+if_pushed;
 									RETURN=RETURN+temp+"&";
+									DDL="未开放提交";
 							}	
 						}
 					}
@@ -38,13 +59,7 @@
 				
 			}
 		}
-	}
-	
-	else if(type.equals("tea")){
-		
-	}
-	
-	
+	}	
 	
 %>
 

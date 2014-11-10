@@ -99,9 +99,10 @@ function display(str){
 			
 			//col-7
 			span = document.createElement('a');
-			span.id='a'+i+'_'+j;
+			span.id=i+'_'+j;
 			span.href='javascript:void(0)';
 			span.innerHTML = '下载';	
+			span.onclick= function(){dwn(this.id);};
 			col7.appendChild(span);
 			
 		}
@@ -126,8 +127,11 @@ function updateDDL(str){
 			xmlhttp.onreadystatechange=function(){
 				if (xmlhttp.readyState==4 && xmlhttp.status==200){
 					var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
-					if(flag=='success');{
+					if(flag=='success'){
 						$.messager.alert('系统消息','DeadLine设置或修改操作已经成功...','info');
+					}
+					else{
+						$.messager.alert('系统消息','数据库操作失败，请联系数据库管理员...','info');
 					}
 			    }
 			};
@@ -138,6 +142,45 @@ function updateDDL(str){
 			window.location.reload(true);
 		}
 	});
+}
 
 
+function dwn(str){
+	$.messager.confirm('确认对话框', '若未到截止日期，您下载的作业可能并不完整，确认下载？', function(r){
+		if (r){
+			$.messager.progress({
+				title:'操作进度',
+				msg:'正在压缩文件，这可能需要较长一段时间，请稍等...',
+				text:''
+			}); 
+			var courseID = document.getElementById("spanNo"+str).innerHTML.replace(/^\s*|\s*$/g,"");
+			var courseT = str.split('_')[1];
+			var xmlhttp;
+			if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}
+			else{// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function(){
+				if (xmlhttp.readyState==4 && xmlhttp.status==200){
+					var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+					if(flag!='failed'){
+						window.location.href="../../HomeWork/"+flag;
+						$.messager.progress('close');
+					}
+					else{
+						$.messager.progress('close');
+						$.messager.alert('警告','下载失败,原因有可能为:<br>1.您没有为本期实验设置DeadLine<br>2.暂时没有学生提交本期实验的作业');
+						
+					}
+			    }
+			};
+			xmlhttp.open("GET",server_context+"/server/pushWork/dwn.jsp?courseID="+courseID+"&courseT="+courseT+"&p="+Math.random(),true);
+			xmlhttp.send();
+		}
+	});
+
+
+	
 }

@@ -31,9 +31,11 @@
     <div data-options="region:'center',border:true,split:true" id="tt">
     	<div id="tabs" class="easyui-tabs"  fit="true" border="false">
             <div title="WorkSpace" style="background-color:lightgreen;">
-            	
+            	<iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
             	<center>
             	<br><h1 id="userID"><%=request.getSession().getAttribute("userID") %></h1><h1 id="info" style="color:white;"></h1><br><br>
+            	<form id="form1" action="../server/pushWork/push.jsp" method="post"  target="hidden_frame" enctype="multipart/form-data">
+            	
             	<table border="1" id="stuTable" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:95%;border-collapse:collapse;">
             		<tr id='_TITLE_' align="center" style="background:Silver;border-style:Solid;">
 					<td>
@@ -62,7 +64,14 @@
 					</td>
 				</tr>
             	</table>
+            	<input type="text" style="display:none;" name="courseID" id="courseID">
+            	<input type="text" style="display:none;" name="courseT" id="courseT">
+            	<input type="text" style="display:none;" name="fileNo" id="fileNo">
+            	<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onClick="window.location.reload(true)">刷新</a>
+            	</form>
             	</center>
+            	
+            	
 
 			</div>
    		</div>
