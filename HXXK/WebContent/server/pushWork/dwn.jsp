@@ -8,10 +8,16 @@
  	String folderName = courseID+"_"+t;
  	String fileLocation = application.getRealPath("/");//******important
  	String comPath = fileLocation+"/HomeWork/"+folderName;
- 	try {
- 		new CompressFolder().zip(comPath , comPath+".zip");//你要压缩的文件夹
- 		out.write(folderName+".zip");
-    }catch (Exception ex) {
-    	out.write("failed");
-    }
+ 	File file = new File(comPath);
+ 	if(file.exists()){
+ 		try {
+ 	 		new CompressFolder().zip(comPath , comPath+".zip");//你要压缩的文件夹
+ 	 		out.write(folderName+".zip");
+ 	    }catch (Exception ex) {
+ 	    	out.write("failed");
+ 	    }
+ 	}
+ 	else
+ 		out.write("failed");
+ 	
  %>

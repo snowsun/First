@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 public class DB_baseInfo {
-
+	private String DBUserName = CONFIG.DBUserName;
+	private String DBPassword = CONFIG.DBPassword;
 	/*** 登录 ***/
 	// =========================================================================
 	public int login(String username, String password) throws SQLException {
@@ -16,7 +16,7 @@ public class DB_baseInfo {
 		int success = 0;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception ex) {
@@ -41,7 +41,7 @@ public class DB_baseInfo {
 		ResultSet res = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -84,7 +84,7 @@ public class DB_baseInfo {
 		Statement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -112,7 +112,7 @@ public class DB_baseInfo {
 		info[0] = "failed";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -146,7 +146,7 @@ public class DB_baseInfo {
 		Statement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -175,7 +175,7 @@ public class DB_baseInfo {
 		String info[][] = new String[50][5];
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -217,7 +217,7 @@ public class DB_baseInfo {
 		String userType = "-1";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -252,7 +252,7 @@ public class DB_baseInfo {
 			String info[][] = new String[200][5];
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			} catch (Exception ex) {
 				System.out.println("连接失败");
@@ -293,7 +293,7 @@ public class DB_baseInfo {
 			String info = "failed";
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			} catch (Exception ex) {
 				System.out.println("连接失败");
@@ -326,7 +326,7 @@ public class DB_baseInfo {
 			Statement stmt = null;
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			} catch (Exception ex) {
 				System.out.println("连接失败");
@@ -357,7 +357,7 @@ public class DB_baseInfo {
 			String info = "";
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			} catch (Exception ex) {
 				System.out.println("连接失败");

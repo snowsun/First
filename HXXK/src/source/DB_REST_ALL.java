@@ -6,35 +6,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DB_password {
+public class DB_REST_ALL {
 	private String DBUserName = CONFIG.DBUserName;
 	private String DBPassword = CONFIG.DBPassword;
-	public boolean changePassword(String userID, String newPassword) {
-		boolean isSuccess = false;
+	/*** 登录 ***/
+	// =========================================================================
+	public String reset(){
 		Connection con = null;
 		Statement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
 		} catch (Exception ex) {
 			System.out.println("连接失败");
 			ex.printStackTrace();
 		}
-
-		String sql = "update baseInfo set password = '" + newPassword + "' where id = '" + userID + "'";
-		System.out.println(sql);
+		
 		try {
+			String sql = "delete  from baseInfo where type='2'";
+			stmt.executeUpdate(sql);
+			sql = "delete  from DDL";
+			stmt.executeUpdate(sql);
+			sql = "delete  from expMark";
+			stmt.executeUpdate(sql);
+			sql = "update mainInfo set LAB1_NUM='0' , LAB2_NUM='0' , LAB3_NUM='0', LAB4_NUM='0', LAB5_NUM='0',LAB1_LIST='',LAB2_LIST='',LAB3_LIST='',LAB4_LIST='',LAB5_LIST=''";
+			stmt.executeUpdate(sql);
+			sql = "delete  from pushStatus";
 			stmt.executeUpdate(sql);
 			con.close();
 			stmt.close();
-			isSuccess = true; // 更新成功
+			return "success";
 		} catch (SQLException e) {
-			System.out.println("sql执行出错");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			isSuccess = false;
-		}
-		return isSuccess;
+			return "failed";
+		}	
 	}
-
+	public static void main(String args[]){
+		new DB_REST_ALL().reset();
+	}
 }

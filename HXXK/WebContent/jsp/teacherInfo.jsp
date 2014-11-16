@@ -11,7 +11,6 @@
 		<center>
 			<input type="button" id="handInput" value="手动导入教师信息" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disTea('1')"/>
 			<input type="button" id="pswReset" value="教师密码重置" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disTea('2')"/>
-			<input type="button" id="deleteTeacher" value="教师删除" style="font-family:'黑体';width:95%;height:30%;border-radius:10px;cursor:hand;" onClick="disTea('3')"/>
 			<iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>		
 			<!--
 			

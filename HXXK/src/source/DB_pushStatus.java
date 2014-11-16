@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DB_pushStatus {
+	private String DBUserName = CONFIG.DBUserName;
+	private String DBPassword = CONFIG.DBPassword;
 	/***获取是否已经提交对应 姓名、课程、期数的作业状态***/
 	// =========================================================================
 	public String if_pushed(String stuID , String courseID , String t ){
@@ -15,7 +17,7 @@ public class DB_pushStatus {
 		String flag="";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception ex) {
@@ -46,7 +48,7 @@ public class DB_pushStatus {
 		Statement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception ex) {

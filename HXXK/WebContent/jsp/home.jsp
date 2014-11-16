@@ -20,6 +20,10 @@
 	if(SESSION_ID=='null' || SESSION_TYPE!='admin'){
 		window.location.href='login.jsp';
 	}
+	
+	function logout(){
+		window.location.href='login.jsp';
+	}
 </script>
 
 </head>
@@ -68,9 +72,14 @@
   				</a><br>
 			</div>
 			<div title="系统功能" >
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
-  					<button class="cs-link">退出</button>
+  				<a href="javascript:void(0)"  class="cs-navi-tab">
+  					<button class="cs-link" onClick="logout()">退出</button>
   				</a><br>
+  				
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/reset.jsp" class="cs-navi-tab">
+  					<button class="cs-link">重置</button>
+  				</a><br>
+  				
 			</div>
 		</div>
     </div>

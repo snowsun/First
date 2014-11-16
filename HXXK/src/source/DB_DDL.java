@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DB_DDL {
+	private String DBUserName = CONFIG.DBUserName;
+	private String DBPassword = CONFIG.DBPassword;
 	/*** 根据课程号得到DDL***/
 	// =========================================================================
 	public String[] getDDLById(String id){
@@ -16,7 +18,7 @@ public class DB_DDL {
 		DDL[0] = "NotFound";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception ex) {
@@ -51,7 +53,7 @@ public class DB_DDL {
 		Statement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception ex) {

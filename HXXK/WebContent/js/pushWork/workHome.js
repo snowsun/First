@@ -17,7 +17,7 @@ function onloading(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
 				if(flag=='no_choose'){
-					alert('对不起您暂未选课，请到管理员处参加选课');
+					alert('对不起您暂未选课，请参与选课，若已过选课截止日期请到管理员处参加选课');
 				}
 				else if(flag=='failed'){
 					alert('对不起，数据库访问出错，请稍后访问，若一直不能访问，请联系数据库管理员');

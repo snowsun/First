@@ -52,7 +52,7 @@
   				</a><br>
 			</div>
 			<div title="系统功能" >
-  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/ss.jsp" class="cs-navi-tab">
+  				<a href="javascript:void(0)"  class="cs-navi-tab" onClick="window.location.href='../login.jsp'">
   					<button class="cs-link">退出</button>
   				</a><br>
 			</div>

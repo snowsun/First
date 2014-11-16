@@ -9,6 +9,8 @@ import java.util.Date;
 
 // 处理与公告有关的数据库操作
 public class DB_noticeInfo {
+	private String DBUserName = CONFIG.DBUserName;
+	private String DBPassword = CONFIG.DBPassword;
 
 	// 获得当前公告信息
 	public String[] getNoticeInfo() {
@@ -18,7 +20,7 @@ public class DB_noticeInfo {
 		String info[] = new String[3];
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
@@ -55,7 +57,7 @@ public class DB_noticeInfo {
 		Statement stmt = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", "sa", "131317");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch (Exception ex) {
 			System.out.println("连接失败");
