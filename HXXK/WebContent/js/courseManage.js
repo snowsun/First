@@ -499,8 +499,14 @@ function onloading_experiment(){//页面载入加载函数;
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
 			/*构造显示*/
-			FOR_DISPLAY(flag);
-			initial(flag.split('&$')[1]);
+			if(flag=='failed'){
+				alert('数据库操作失败，请稍后再试，若此问题持续存在请联系数据库管理员');
+			}
+			else{
+				
+				FOR_DISPLAY(flag);
+				initial(flag.split('&$')[1]);
+			}
 	    }
 	};
 	xmlhttp.open("GET","../server/admin/experiment/fetch_experiment.jsp?p="+Math.random(),true);

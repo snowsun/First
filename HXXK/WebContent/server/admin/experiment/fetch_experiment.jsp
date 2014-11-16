@@ -3,6 +3,10 @@
 <%	
 
 	String ABOUT_CONFIG[] =new DB_config().fetch_config();
+	if(ABOUT_CONFIG[0].equals("failed")){
+		out.write("failed");
+		return;
+	}
 	//week
 	String week = ABOUT_CONFIG[3];
 	//time
@@ -10,6 +14,10 @@
 	time = time.replaceAll("@", "");
 	//room
 	String ROOM[] = new DB_laboratory().fetch_laboratory();
+	if(ROOM[0].equals("failed")){
+		out.write("failed");
+		return;
+	}
 	String room="";
 	for(int i = 0 ; i<20 ; i++){
 		if(!ROOM[i].equals("over"))
@@ -19,6 +27,10 @@
 	}
 	//teacher
 	String TEACHER[][] = new DB_baseInfo().fetch_teacher();
+	if(TEACHER[0][0].equals("failed")){
+		out.write("failed");
+		return;
+	}
  	String teacher="";
  	for(int i=0;i<50;i++){
  		if(!TEACHER[i][0].equals("over"))
@@ -32,6 +44,7 @@
 //	String info[][] = new DB_mainInfo().fetch_mainInfo();
 	if(info[0][0].equals("failed")){
 		out.write("failed");
+		return;
 	}
 	else{
 		String RETURN="",temp="";
