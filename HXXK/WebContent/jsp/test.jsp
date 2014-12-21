@@ -67,12 +67,12 @@
             	<input type="text" style="display:none;" name="courseID" id="courseID">
             	<input type="text" style="display:none;" name="courseT" id="courseT">
             	<input type="text" style="display:none;" name="fileNo" id="fileNo">
+            	<input type="text" style="display:none;" name="flag" id="flag">
             	<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onClick="window.location.reload(true)">刷新</a>
+            	<a id="btn2" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onClick="window.location.href='login.jsp';">退出</a>
             	</form>
             	</center>
             	
-            	
-
 			</div>
    		</div>
     </div>

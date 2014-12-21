@@ -14,6 +14,12 @@
 		<td>编号</td><td>实验名称</td><td>期数</td><td>老师</td><td>时间</td><td>DeadLine</td><td>下载</td>
 		</tr>
 	</table>
+	
+	
+	<a id="gen" title="点击可以导出课表至桌面位置" href="javascript:void(0)" onClick="downloadSchedule()">点击此处下载课表</a>
+		<div id="progress" class="easyui-progressbar" data-options="value:0" style="background-color:white;width:auto;display:none;"></div> 	
+		<span id="hs"></span>
+		<a id="dwn" href="../../scheduleLocation/Schedule.xls" style="display:none;">课表生成成功,点击此处下载课表</a>
 </body>
 </html>
 

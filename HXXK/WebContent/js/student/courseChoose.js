@@ -54,43 +54,16 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		span = document.createElement('span');
 		span.id='spanNo'+i;
 		span.innerHTML = info_col[0];
+		span.style.display='none';
 		col1.appendChild(span);
+		col1.appendChild(document.createTextNode(i));
 		//col-2
 		span = document.createElement('span');
 		span.id='spanName'+i;
 		span.style.cursor='hand';
 		
 		/******这个地方的冗杂是水平有限的无奈之举*********/	
-		if(i==0)   span.onclick= function(){pop_mark_dialog(0);};			/////////////////////////////////////////////////////////
-		if(i==1)   span.onclick= function(){pop_mark_dialog(1);};
-		if(i==2)   span.onclick= function(){pop_mark_dialog(2);};
-		if(i==3)   span.onclick= function(){pop_mark_dialog(3);};
-		if(i==4)   span.onclick= function(){pop_mark_dialog(4);};
-		if(i==5)   span.onclick= function(){pop_mark_dialog(5);};
-		if(i==6)   span.onclick= function(){pop_mark_dialog(6);};
-		if(i==7)   span.onclick= function(){pop_mark_dialog(7);};
-		if(i==8)   span.onclick= function(){pop_mark_dialog(8);};
-		if(i==9)   span.onclick= function(){pop_mark_dialog(9);};
-		if(i==10)  span.onclick= function(){pop_mark_dialog(10);};
-		if(i==11)  span.onclick= function(){pop_mark_dialog(11);};
-		if(i==12)  span.onclick= function(){pop_mark_dialog(12);};
-		if(i==13)  span.onclick= function(){pop_mark_dialog(13);};
-		if(i==14)  span.onclick= function(){pop_mark_dialog(14);};
-		if(i==15)  span.onclick= function(){pop_mark_dialog(15);};
-		if(i==16)  span.onclick= function(){pop_mark_dialog(16);};
-		if(i==17)  span.onclick= function(){pop_mark_dialog(17);};
-		if(i==18)  span.onclick= function(){pop_mark_dialog(18);};
-		if(i==19)  span.onclick= function(){pop_mark_dialog(19);};
-		if(i==20)  span.onclick= function(){pop_mark_dialog(20);};
-		if(i==21)  span.onclick= function(){pop_mark_dialog(21);};
-		if(i==22)  span.onclick= function(){pop_mark_dialog(22);};
-		if(i==23)  span.onclick= function(){pop_mark_dialog(23);};
-		if(i==24)  span.onclick= function(){pop_mark_dialog(24);};
-		if(i==25)  span.onclick= function(){pop_mark_dialog(25);};
-		if(i==26)  span.onclick= function(){pop_mark_dialog(26);};
-		if(i==27)  span.onclick= function(){pop_mark_dialog(27);};
-		if(i==28)  span.onclick= function(){pop_mark_dialog(28);};
-		if(i==29)  span.onclick= function(){pop_mark_dialog(29);};
+		span.onclick= function(){pop_mark_dialog(this.id);};
 		span.innerHTML = info_col[1];
 		col2.appendChild(span);
 		
@@ -277,6 +250,7 @@ function submit(){
 }
 //=====================================================================
 function pop_mark_dialog(str){//弹出备注框
+	str = str.split('spanName')[1];
 	var no;
 	document.getElementById('hidden_id').innerHTML=document.getElementById("spanNo"+str).innerHTML;
 	no=document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,"");	
@@ -374,11 +348,15 @@ function DisSchedule(str){
 		span = document.createElement('span');
 		span.id='spanNo'+i;
 		span.innerHTML = info_col[0];
+		span.style.display='none';
+		col1.appendChild(document.createTextNode(i));
 		col1.appendChild(span);
 		//col-2
 		span = document.createElement('span');
 		span.id='spanName'+i;
 		span.innerHTML = info_col[1];
+		span.style.cursor = 'hand';
+		span.onclick= function(){pop_mark_dialog(this.id);};
 		col2.appendChild(span);
 		//col-3
 		span = document.createElement('span');

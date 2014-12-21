@@ -29,6 +29,7 @@
 				String fileNo = mySmartUpload.getRequest().getParameter("fileNo").toString();
 			 	String courseID = mySmartUpload.getRequest().getParameter("courseID").toString();
 			 	String courseT = mySmartUpload.getRequest().getParameter("courseT").toString();
+			 	String out_of_time = mySmartUpload.getRequest().getParameter("flag").toString();
 			 	String folderName = courseID+"_"+courseT;
 		 	
 			 	int FILE_NO = Integer.parseInt(fileNo);
@@ -45,7 +46,7 @@
 
 				if (!myFile.isMissing()) {//路径存在
 					String extname = myFile.getFileExt();//获取文件主路径
-					String fileName = username + "." + extname;// 产生一个唯一的文件名
+					String fileName = username+ out_of_time + "." + extname;// 产生一个唯一的文件名
 					System.out.println(fileName);
 					myFile.saveAs(fileLocation+"/HomeWork/"+folderName+"/"+fileName);//更换路径重命名
 					

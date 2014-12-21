@@ -80,6 +80,10 @@
   					<button class="cs-link">重置</button>
   				</a><br>
   				
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/SaveMark.jsp" class="cs-navi-tab">
+  					<button class="cs-link">备份往年作业数据</button>
+  				</a><br>
+  				
 			</div>
 		</div>
     </div>

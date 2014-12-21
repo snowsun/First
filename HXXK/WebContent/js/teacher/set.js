@@ -60,6 +60,8 @@ function display(str){
 			span = document.createElement('span');
 			span.id='spanNo'+i+'_'+j;
 			span.innerHTML = Rinfo[0];
+			span.style.display='none';
+			col1.appendChild(document.createTextNode(i));
 			col1.appendChild(span);
 			//col-2
 			span = document.createElement('span');
@@ -184,3 +186,48 @@ function dwn(str){
 
 	
 }
+
+
+//====================================================================
+function downloadSchedule(){//下载课表	
+	//传入后台进行课表的下载
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='error_0')
+				alert('Excel操作失败，请联系sunchun@smail.nju.edu.cn');
+			else if(flag=='error_1')
+				alert('数据库操作失败，请联系数据库管理员重启数据库');
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/checkChoose/downloadSchedule.jsp?p="+Math.random(),true);
+	xmlhttp.send();
+	
+	document.getElementById('progress').style.display='';
+	document.getElementById('gen').style.display='none';
+	document.getElementById('hs').innerHTML='正在处理请稍后......';
+	send();
+}
+/////////////////////////////////////////////////////////////////////
+function send(){ 
+	var values = $('#progress').progressbar('getValue'); 
+	if(values<100){
+		values=values+20;
+		$('#progress').progressbar({ 
+			value: values 
+		}); 
+	}
+	else{
+		document.getElementById('dwn').style.display='';
+		document.getElementById('hs').innerHTML='';
+		return;
+	}
+    setTimeout("send();",1000);
+  }

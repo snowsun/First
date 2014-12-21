@@ -72,6 +72,8 @@ function Dis_Stu(str){
 		span = document.createElement('span');
 		span.id='spanNo'+i;
 		span.innerHTML = info_col[0];
+		span.style.display='none';
+		col1.appendChild(document.createTextNode(i));
 		col1.appendChild(span);
 		//col-2
 		span = document.createElement('span');
@@ -142,8 +144,8 @@ function pushWork(str){
 	if(day<10) day='0'+day;
 	var nowTime = year+'-'+month+'-'+day;
 	if(nowTime>DDL){
-		alert('抱歉，已过本次作业的提交截止日期，无法提交作业');
-		return;
+		alert('已过本次作业的提交截止日期，您的作业依然可以提交，但是将被标记为‘out_of_time’,这可能会影响您的成绩');
+		document.getElementById("flag").value = 'out_of_time';
 	}
 	var courseID = document.getElementById("spanNo"+i).innerHTML.replace(/^\s*|\s*$/g,"");
 	var courseT = document.getElementById("spanT"+i).innerHTML.replace(/^\s*|\s*$/g,"");

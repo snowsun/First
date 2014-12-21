@@ -67,18 +67,18 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		col8 = document.createElement('td');
 		row.appendChild(col1);
 		row.appendChild(col2);
-	//	row.appendChild(col3);
 		row.appendChild(col4);
 		row.appendChild(col5);
 		row.appendChild(col6);
-	//	row.appendChild(col7);
 		row.appendChild(col8);
 	
 		//col-1
 		span = document.createElement('span');
 		span.id='spanNo'+i;
 		span.innerHTML = info_col[0];
+		span.style.display='none';
 		col1.appendChild(span);
+		col1.appendChild(document.createTextNode(i));
 		//col-2
 		span = document.createElement('span');
 		span.id='spanName'+i;

@@ -7,7 +7,7 @@
 		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 		<script type="text/javascript" src="../js/RECH.js"></script>
 	</head>
-	<body style="background-color:lightgreen;font-family:'微软雅黑';">			
+	<body style="background-color:lightgreen;font-family:'微软雅黑';">
 		<div id="dialog" class="easyui-dialog" style="width:400px;height:180px"
 		data-options="title:'message',modal:true,
 			buttons:[{
@@ -54,9 +54,9 @@
 					</td>
 				</tr>
 			</table>	
-			<hr />
+			<hr/>
 			<a id="re"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="display:none;" onClick="reChoose()">重新选课</a>  
-			<a id="ok"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="display:none;" onClick="submit()">提交选课信息</a>  
+			<a id="ok"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-ok'"     style="display:none;" onClick="submit()">提交选课信息</a>  
 		</center>
 		<span id="_NUM_" style="display:none;"></span>
 		<span id="_ROWS_" style="display:none;"></span>

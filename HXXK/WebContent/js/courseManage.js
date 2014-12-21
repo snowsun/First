@@ -379,45 +379,14 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		span = document.createElement('span');
 		span.id='spanNo'+i;
 		span.innerHTML = info_col[0];
+		span.style.display='none';
 		col1.appendChild(span);
+		col1.appendChild(document.createTextNode(i));
 		//col-2
 		span = document.createElement('span');
 		span.id='spanName'+i;
 		span.style.cursor='hand';
-		
-		/******这个地方的冗杂是水平有限的无奈之举*********/
-		
-		if(i==0)   span.onclick= function(){checkClicked(0);};			/////////////////////////////////////////////////////////
-		if(i==1)   span.onclick= function(){checkClicked(1);};
-		if(i==2)   span.onclick= function(){checkClicked(2);};
-		if(i==3)   span.onclick= function(){checkClicked(3);};
-		if(i==4)   span.onclick= function(){checkClicked(4);};
-		if(i==5)   span.onclick= function(){checkClicked(5);};
-		if(i==6)   span.onclick= function(){checkClicked(6);};
-		if(i==7)   span.onclick= function(){checkClicked(7);};
-		if(i==8)   span.onclick= function(){checkClicked(8);};
-		if(i==9)   span.onclick= function(){checkClicked(9);};
-		if(i==10)  span.onclick= function(){checkClicked(10);};
-		if(i==11)  span.onclick= function(){checkClicked(11);};
-		if(i==12)  span.onclick= function(){checkClicked(12);};
-		if(i==13)  span.onclick= function(){checkClicked(13);};
-		if(i==14)  span.onclick= function(){checkClicked(14);};
-		if(i==15)  span.onclick= function(){checkClicked(15);};
-		if(i==16)  span.onclick= function(){checkClicked(16);};
-		if(i==17)  span.onclick= function(){checkClicked(17);};
-		if(i==18)  span.onclick= function(){checkClicked(18);};
-		if(i==19)  span.onclick= function(){checkClicked(19);};
-		if(i==20)  span.onclick= function(){checkClicked(20);};
-		if(i==21)  span.onclick= function(){checkClicked(21);};
-		if(i==22)  span.onclick= function(){checkClicked(22);};
-		if(i==23)  span.onclick= function(){checkClicked(23);};
-		if(i==24)  span.onclick= function(){checkClicked(24);};
-		if(i==25)  span.onclick= function(){checkClicked(25);};
-		if(i==26)  span.onclick= function(){checkClicked(26);};
-		if(i==27)  span.onclick= function(){checkClicked(27);};
-		if(i==28)  span.onclick= function(){checkClicked(28);};
-		if(i==29)  span.onclick= function(){checkClicked(29);};
-		
+		span.onclick= function(){checkClicked(this.id);};
 		span.innerHTML = info_col[1];
 		col2.appendChild(span);
 		//col-3
@@ -664,6 +633,7 @@ function remove_experiment(){//删除实验
 
 //====================================================================
 function checkClicked(str){//点击课程名称弹出备注修改框，触发
+	str = str.split('spanName')[1];
 	var no;
 	document.getElementById('hidden_id').innerHTML=document.getElementById("spanNo"+str).innerHTML;
 	no=document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,"");	
