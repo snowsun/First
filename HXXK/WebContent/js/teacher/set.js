@@ -23,7 +23,7 @@ function display(str){
 	
 	//*******
 	
-	var table,row,col1,col2,col3,col4,col5,col6,col7;
+	var table,row,col1,col2,col3,col5,col6,col7,col8,col9;
 	table=document.getElementById('table');
 	var num = str.split('_NUM_INFO_')[0];
 	str = str.split('_NUM_INFO_')[1];
@@ -43,18 +43,22 @@ function display(str){
 			col1 = document.createElement('td');
 			col2 = document.createElement('td');
 			col3 = document.createElement('td');
-			col4 = document.createElement('td');
+	//		col4 = document.createElement('td');
 			col5 = document.createElement('td');
 			col6 = document.createElement('td');
 			col7 = document.createElement('td');
+			col8 = document.createElement('td');
+			col9 = document.createElement('td');
 		
 			row.appendChild(col1);
 			row.appendChild(col2);
 			row.appendChild(col3);
-			row.appendChild(col4);
+	//		row.appendChild(col4);
 			row.appendChild(col5);
 			row.appendChild(col6);
 			row.appendChild(col7);
+			row.appendChild(col8);
+			row.appendChild(col9);
 			
 			//col-1
 			span = document.createElement('span');
@@ -74,10 +78,12 @@ function display(str){
 			span.innerHTML = '第'+(j+1)+'期';
 			col3.appendChild(span);
 			//col-4
+			/*
 			span = document.createElement('span');
 			span.id='spanTeacher'+i+'_'+j;
 			span.innerHTML = Rinfo[2].split('-')[1];
 			col4.appendChild(span);
+			*/
 			//col-5
 			span = document.createElement('span');
 			span.id='spanTime'+i+'_'+j;
@@ -106,6 +112,28 @@ function display(str){
 			span.innerHTML = '下载';	
 			span.onclick= function(){dwn(this.id);};
 			col7.appendChild(span);
+			
+			//col-8
+			var b = document.createElement('a');
+			b.href='javascript:void(0)';
+			b.value=i+'_'+j;
+			b.innerHTML = "上传";	
+//			b.onclick= function(){pushWork(this);};  此处要加教师上传作业的执行函数
+			
+			var f = document.createElement('input');
+			f.type='file';
+			f.name='file';
+			f.id='file'+i+'_'+j;
+			col8.appendChild(f);
+			col8.appendChild(b);
+			
+			//col-9
+			span = document.createElement('a');
+			span.id='pub__'+i+'_'+j;
+			span.href='javascript:void(0)';
+			span.innerHTML = '新建、修改';	
+			span.onclick= function(){pubClicked(this.id);};
+			col9.appendChild(span);
 			
 		}
 	}
@@ -231,3 +259,68 @@ function send(){
 	}
     setTimeout("send();",1000);
   }
+
+function pubClicked(str){
+	var M = 'spanNo'+str.split('__')[1];
+	var id = document.getElementById(M).innerHTML.replace(/^\s*|\s*$/g,"");
+	var turn = str.split('__')[1].split('_')[1];
+	turn = parseInt(turn)+1;
+	document.getElementById('hidden_id').innerHTML = id;
+	document.getElementById('hidden_turn').innerHTML = turn;
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库读取失败，请刷新后重试');
+			else if(flag=='DO_NOT_EXIST'){
+				$('#dialog').dialog('setTitle','第'+turn+'期作业要求');
+				$('#dialog').window('open');
+				document.getElementById('ta').innerHTML='您还没有对该期课程作业发布作业要求,说点什么吧......';
+			}
+			else{
+				$('#dialog').dialog('setTitle','第'+turn+'期作业要求');
+				$('#dialog').window('open');
+				document.getElementById('ta').innerHTML=flag;
+			}
+		}
+	};
+	xmlhttp.open("GET","../../server/teacher/set/pubWorkRequest.jsp?id="+id+"&turn="+turn+"&p="+Math.random(),true);
+	xmlhttp.send();
+	
+}
+
+//====================================================================
+function save_request(){//点击保存备注按钮，触发
+	var id=document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,"");	
+	var turn =document.getElementById('hidden_turn').innerHTML.replace(/^\s*|\s*$/g,"");
+	var mark = document.getElementById('ta').value.replace(/^\s*|\s*$/g,"");	
+	mark = encodeURI(encodeURI(mark));
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库读取失败，请刷新后重试');
+			else{
+				document.getElementById('ta').disabled=true;
+				alert('作业要求发布成功！');
+			}
+				
+	    }
+	};
+	xmlhttp.open("GET","../../server/teacher/set/refreshWorkRequest.jsp?id="+id+"&turn="+turn+"&mark="+mark+"&p="+Math.random(),true);
+	xmlhttp.send();
+}

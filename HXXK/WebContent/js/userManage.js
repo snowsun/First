@@ -170,25 +170,17 @@ function resetPsw(){//重置学生密码
 function disTea(str){//显示相关函数
 	if(str=='1'){
 		document.getElementById('handInput').disabled='disabled';
-		$('#pswReset').fadeToggle();
-		$('#deleteTeacher').fadeToggle(function(){
+		$('#pswReset').fadeToggle(function(){
 			document.getElementById('handImp').style.display='';
 		});	
 	}
 	else if(str=='2'){
 		document.getElementById('pswReset').disabled='disabled';
-		$('#deleteTeacher').fadeToggle();
 		$('#handInput').fadeToggle(function(){
 			document.getElementById('resetPsw').style.display='';
 		});
 	}
-	else if(str=='3'){
-		document.getElementById('deleteTeacher').disabled='disabled';
-		$('#handInput').fadeToggle();
-		$('#pswReset').fadeToggle(function(){
-			document.getElementById('deleteTe').style.display='';
-		});
-	}
+	
 }
 //====================================================================
 function impToDB3(){//手动导入教师信息

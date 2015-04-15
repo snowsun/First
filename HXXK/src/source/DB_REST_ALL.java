@@ -35,6 +35,8 @@ public class DB_REST_ALL {
 			stmt.executeUpdate(sql);
 			sql = "delete  from pushStatus";
 			stmt.executeUpdate(sql);
+			sql = "delete  from workRequest";
+			stmt.executeUpdate(sql);
 			con.close();
 			stmt.close();
 			return "success";

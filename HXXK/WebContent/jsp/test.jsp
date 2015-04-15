@@ -57,6 +57,9 @@
 						<h1>DeadLine</h1>
 					</td>
 					<td>
+						<h1>作业要求</h1>
+					</td>
+					<td>
 						<h1>提交作业</h1>
 					</td>
 					<td>
@@ -76,5 +79,18 @@
 			</div>
    		</div>
     </div>
+    
+    <div id="dialog" class="easyui-dialog" style="width:600px;height:300px"
+			data-options="title:'My Dialog',buttons:'#bb',modal:true,closed:true,
+			onClose:function(){document.getElementById('ta').disabled=true;},
+			toolbar:[{
+				text:'',
+				iconCls:'icon-edit',
+			}]">
+			<textarea id='ta' rows="14" cols="78" disabled></textarea>
+	</div>
+	<div id="bb">
+		<a href="#" class="easyui-linkbutton" onClick="$('#dialog').window('close');">关闭</a>
+	</div>
 </body>
 </html>

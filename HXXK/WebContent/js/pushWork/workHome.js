@@ -34,7 +34,7 @@ function onloading(){
 
 
 function Dis_Stu(str){
-	var table,row,col1,col2,col3,col4,col5,col6,col7,col8,span;
+	var table,row,col1,col2,col3,col4,col5,col6,col7,col8,col9,span;
 	table=document.getElementById('stuTable');
 	var info = str.split('&');
 	var len = info.length-1;
@@ -54,9 +54,11 @@ function Dis_Stu(str){
 		col4 = document.createElement('td');
 		col5 = document.createElement('td');
 		col6 = document.createElement('td');
+		col9 = document.createElement('td');
 		col7 = document.createElement('td');
 		col8 = document.createElement('td');
 		col8.style.background='red';
+		
 	
 		row.appendChild(col1);
 		row.appendChild(col2);
@@ -64,8 +66,10 @@ function Dis_Stu(str){
 		row.appendChild(col4);
 		row.appendChild(col5);
 		row.appendChild(col6);
+		row.appendChild(col9);
 		row.appendChild(col7);
 		row.appendChild(col8);
+		
 	
 		
 		//col-1
@@ -100,6 +104,15 @@ function Dis_Stu(str){
 		span.id='spanDDL'+i;
 		span.innerHTML = info_col[5];
 		col6.appendChild(span);
+		
+		//col-9
+		var a = document.createElement('a');
+		a.href='javascript:void(0)';
+		a.value=i;
+		a.innerHTML = "作业要求";	
+		a.onclick= function(){DisWork(this.value);};
+		col9.appendChild(a);
+		
 		//col-7
 		var a = document.createElement('a');
 		a.href='javascript:void(0)';
@@ -154,5 +167,38 @@ function pushWork(str){
 	document.getElementById("fileNo").value = i;
 	document.getElementById("form1").submit();
 	
+	
+}
+
+
+function DisWork(str){
+	var id = document.getElementById('spanNo'+str).innerHTML.replace(/^\s*|\s*$/g,"");
+	var turn = document.getElementById('spanT'+str).innerHTML.replace(/^\s*|\s*$/g,"");
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库读取失败，请刷新后重试');
+			else if(flag=='DO_NOT_EXIST'){
+				$('#dialog').dialog('setTitle','作业要求如下：');
+				$('#dialog').window('open');
+				document.getElementById('ta').innerHTML='老师尚未在线发布该作业的具体要求，以课上老师留的作业要求为准！';
+			}
+			else{
+				$('#dialog').dialog('setTitle','作业要求如下：');
+				$('#dialog').window('open');
+				document.getElementById('ta').innerHTML=flag;
+			}
+		}
+	};
+	xmlhttp.open("GET","../server/teacher/set/pubWorkRequest.jsp?id="+id+"&turn="+turn+"&p="+Math.random(),true);
+	xmlhttp.send();
 	
 }
