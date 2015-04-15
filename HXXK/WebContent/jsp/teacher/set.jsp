@@ -8,13 +8,20 @@
 <script type="text/javascript" src="<%=basePath%>js/teacher/set.js"></script>
 </head>
 <body onLoad = "onloading()" style="background:lightgreen">
+	<iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
+	<span id="T" style="display:none;"></span>
+	<form id="form1" action="../../server/pushWork/push_corrected_work.jsp" method="post"  target="hidden_frame" enctype="multipart/form-data">
 	<span id="teacherID" style="display:none;"><%=session.getAttribute("userID")%></span>
 	<table border="1" id="table" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
 		<tr id="ttitle" align="center" style="color:DimGray;border-style:Solid;background:Silver">
 		<td>编号</td><td>实验名称</td><td>期数</td><td>时间</td><td>DeadLine</td><td>下载</td><td>上传批改后作业</td><td>发布要求</td>
 		</tr>
 	</table>
-	
+	<input type="text" style="display:none;" name="courseID" id="courseID">
+    <input type="text" style="display:none;" name="courseT" id="courseT">
+    <input type="text" style="display:none;" name="fileNo" id="fileNo">
+    <input type="text" style="display:none;" name="fileName" id="fileName">
+	</form>
 	
 	<a id="gen" title="点击可以导出课表至桌面位置" href="javascript:void(0)" onClick="downloadSchedule()">点击此处下载课表</a>
 		<div id="progress" class="easyui-progressbar" data-options="value:0" style="background-color:white;width:auto;display:none;"></div> 	
@@ -39,6 +46,7 @@
 	<!-- BUFFER FOR MARK -->
 	<span id="hidden_id" style="display:none;"></span>
 	<span id="hidden_turn" style="display:none;"></span>
+	
 </body>
 </html>
 

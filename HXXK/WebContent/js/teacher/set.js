@@ -27,7 +27,7 @@ function display(str){
 	table=document.getElementById('table');
 	var num = str.split('_NUM_INFO_')[0];
 	str = str.split('_NUM_INFO_')[1];
-	
+	document.getElementById('T').innerHTML = num ;
 	var info = str.split('_CUT_');
 	var len = info.length-1;
 	for(var i=0 ; i<len ; i++){
@@ -118,7 +118,7 @@ function display(str){
 			b.href='javascript:void(0)';
 			b.value=i+'_'+j;
 			b.innerHTML = "上传";	
-//			b.onclick= function(){pushWork(this);};  此处要加教师上传作业的执行函数
+			b.onclick= function(){pushWork(this);};  
 			
 			var f = document.createElement('input');
 			f.type='file';
@@ -323,4 +323,39 @@ function save_request(){//点击保存备注按钮，触发
 	};
 	xmlhttp.open("GET","../../server/teacher/set/refreshWorkRequest.jsp?id="+id+"&turn="+turn+"&mark="+mark+"&p="+Math.random(),true);
 	xmlhttp.send();
+}
+
+
+//==============================================================================
+function pushWork(str){
+	$.messager.confirm('警告', '您上传的作业必须以您学生的学号命名，不能有其他任何字符，否则学生将无法下载对应的作业！', function(r){
+		if (r){
+			var i = str.value;
+			var ext = document.getElementById("file"+i).value.replace(/^\s*|\s*$/g,"").split('.')[1];
+			if(ext!='pdf' && ext!='PDF' && ext!='doc' && ext!='docx' && ext!='DOC' && ext!='DOCX'){
+				alert('上传文件类型不符合类型要求');
+				return;
+			}
+			var filename = document.getElementById("file"+i).value.replace(/^\s*|\s*$/g,"").split('.')[0];
+			var len = filename.split('\\').length;
+			filename = filename.split('\\')[len-1];
+			var courseID = document.getElementById("spanNo"+i).innerHTML.replace(/^\s*|\s*$/g,"");
+			var courseT = str.value.split('_')[1];
+			courseT = parseInt(courseT)+1;
+			document.getElementById("courseID").value = courseID;
+			document.getElementById("courseT").value = courseT;
+			document.getElementById("fileName").value = filename;
+			
+			var T = document.getElementById("T").innerHTML.replace(/^\s*|\s*$/g,"");
+			T = parseInt(T);
+			var I = str.value.split('_')[0];
+			I = parseInt(I);
+			var J = str.value.split('_')[1];
+			J = parseInt(J);
+			alert( I*T+J);
+			document.getElementById("fileNo").value = I*T+J;
+			document.getElementById("form1").submit();
+		}
+	});
+	
 }
