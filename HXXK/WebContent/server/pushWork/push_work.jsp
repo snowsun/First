@@ -41,7 +41,6 @@
 										if(DDL.equals("NoPublished"))
 											DDL="未开放提交";		
 									}
-									System.out.println(DDL);
 									
 									String if_pushed = new DB_pushStatus().if_pushed(id, info[i][0], t);
 									if(if_pushed.equals("failed")){

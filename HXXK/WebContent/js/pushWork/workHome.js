@@ -120,12 +120,23 @@ function Dis_Stu(str){
 		a.innerHTML = "提交";	
 		a.onclick= function(){pushWork(this);};
 		
+		var space = document.createElement('span');//只是为了两个button之间的空格
+		space.innerHTML = '  ';
+		
+		var b = document.createElement('a');
+		b.href='javascript:void(0)';
+		b.value=i;
+		b.innerHTML = "下载批改后作业";	
+		b.onclick= function(){downWork(this);};
+		
 		var f = document.createElement('input');
 		f.type='file';
 		f.name='file';
 		f.id='file'+i;
 		col7.appendChild(f);
 		col7.appendChild(a);
+		col7.appendChild(space);
+		col7.appendChild(b);
 		
 		//col-8
 		var ifPushed = info_col[6];
@@ -201,4 +212,32 @@ function DisWork(str){
 	xmlhttp.open("GET","../server/teacher/set/pubWorkRequest.jsp?id="+id+"&turn="+turn+"&p="+Math.random(),true);
 	xmlhttp.send();
 	
+}
+
+
+
+function downWork(str){
+	var i = str.value;
+	var folder = document.getElementById('spanNo'+i).innerHTML.replace(/^\s*|\s*$/g,"")+'_'+document.getElementById('spanT'+i).innerHTML.replace(/^\s*|\s*$/g,"");
+	var userID = document.getElementById('userID').innerHTML.replace(/^\s*|\s*$/g,"");
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('老师并未上传批改后的作业给你，若有疑问请联系老师！');
+			else
+				window.location.href='../corrected_work_folder/'+folder+'/'+flag;
+		}
+	};
+	xmlhttp.open("GET","../server/pushWork/judgePath.jsp?folder="+folder+"&userID="+userID+"&p="+Math.random(),true);
+	xmlhttp.send();
+//	window.location.href='../corrected_work_folder/56221845_2/111220106.doc';
+
 }

@@ -19,7 +19,7 @@
 						编号
 					</td>
 					<td>
-						实验名称
+						实验名称---(点击可查看)
 					</td>
 					<td>
 						周期
@@ -28,7 +28,7 @@
 						实验室
 					</td>
 					<td>
-						教师
+						教师---(点击可查看)
 					</td>
 					<td>
 						实验时间
@@ -68,6 +68,16 @@
 		
 		<!-- BUFFER FOR MARK -->
 		<span id="hidden_id" style="display:none;"></span>
+		
+		
+		
+		
+		<div id="dialog2" class="easyui-dialog" style="width:600px;height:300px" data-options="title:'教师简介',closed:true,modal:true">
+			<div id="teaInfo" class="easyui-panel"  style="width:auto;height:auto;background:#fafafa;margin:0px auto;"   
+                data-options="iconCls:'icon-ok',closable:false,collapsible:true,minimizable:false,maximized:true">   
+            </div>  
+		</div>
+		
 	</body>
 </html>
 

@@ -154,7 +154,6 @@ public class DB_baseInfo {
 		}
 
 		String sql = "update baseInfo set mark='"+course+"' where id='"+userID+"'";
-		System.out.println(sql);
 		try {
 			stmt.executeUpdate(sql);
 			con.close();

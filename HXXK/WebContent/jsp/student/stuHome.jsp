@@ -22,7 +22,7 @@
 	}
 </script>
 </head>
-<body class="easyui-layout" onLoad="time()">
+<body class="easyui-layout" onLoad="check_whether_choose_time()">
     <div data-options="region:'north',split:false" class="cs-north">
     	<center>
     	<div class="title" id="title"></div>
@@ -63,8 +63,27 @@
             <div title="Home">
 				<div>
 					<p style="font-family:'华文行楷';font-size:35px;border-radius:10px;text-align:center;">南京大学化学实验中心选课系统欢迎您！</p>
+					<div id="dialog2" class="easyui-dialog" style="width:650px;height:300px" data-options="title:'可选课时间确认',closed:true,buttons:'#bb',modal:true,onClose:function(){window.location.reload();}">
+						
+						<center>
+						<p style="color:blue;font-family:'微软雅黑';font-size:15px;">请注意，时间一旦设置完毕将不可自行更改，除非联系管理员老师！</p>
+						<p style="color:blue;font-family:'微软雅黑';font-size:15px;">你在下表右侧勾选的为你【不能选择实验】的时间！</p>
+						<p style="color:blue;font-family:'微软雅黑';font-size:15px;">如果实验开放的所有时间【都与其他课程不冲突】，则【无需选择】直接提交即可！</p>
+						<table border="5" id="opTable" style="color:DimGray;border-style:Solid;font-family:'黑体';font-style:normal;text-decoration:none;border-collapse:collapse;">
+							<tr id='_TITLE_' align="center">
+								<td>
+									实验时间
+								</td>
+								<td style="color:red;">
+									【不能】上本实验课的时间
+								</td>
+							</tr>
+						</table></center> 
+					</div>
+					<div id="bb">
+					<a href="#" class="easyui-linkbutton" onClick="save_time()">提交</a>
+					</div>
 				</div>
-				<div id="showtime" style="top:68%;text-align:right;position:relative;"></div>
 			</div>
    		</div>
     </div>

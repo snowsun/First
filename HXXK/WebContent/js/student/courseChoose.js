@@ -143,6 +143,43 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 	
 }
 //====================================================================
+function hideCheckBox(){
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库访问失败，请稍后再次进行访问！');
+			else{
+				var len = flag.split('@').length-1;
+				for(var i=0 ; i<len ; i++){
+					var cannotTime='星期'+flag.split('@')[i];
+					for(var j=0 ; j<20 ; j++){
+						if(document.getElementById('spanTime'+j)){
+							if(document.getElementById('spanTime'+j).innerHTML==cannotTime){
+								for(var r=0; r<8 ; r++){
+									if(document.getElementById('check_stu'+j+'_'+r)){
+										document.getElementById('check_stu'+j+'_'+r).disabled=true;
+									}
+								}
+							}
+						}
+						
+					}
+				}
+			}
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/courseChoose/fetch_cannotTime.jsp?p="+Math.random(),true);
+	xmlhttp.send();
+}
+//====================================================================
 function onloading_courseChoose(){//页面载入加载函数;
 	var xmlhttp;
 	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -159,6 +196,7 @@ function onloading_courseChoose(){//页面载入加载函数;
 			else{
 				/*构造显示*/
 				FOR_DISPLAY(flag);
+				hideCheckBox();
 			}
 	    }
 	};
@@ -372,6 +410,8 @@ function DisSchedule(str){
 		span = document.createElement('span');
 		span.id='spanTeacher'+i;
 		span.innerHTML = info_col[4];
+		span.style.cursor = 'hand';
+		span.onclick= function(){disTeaNotice(this.innerHTML);};
 		col5.appendChild(span);
 		//col-6
 		span = document.createElement('span');
@@ -385,6 +425,35 @@ function DisSchedule(str){
 		col7.appendChild(span);
 	}
 }
+
+function disTeaNotice(str){
+	
+	var teaId = str.split('-')[0];
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='zero'){
+				alert('该老师很低调，从未给自己编辑过简介哦~');
+			}
+			else{
+				document.getElementById("teaInfo").innerHTML=flag;
+				$('#dialog2').window('open');
+			}
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/schedule/getTeaNotice.jsp?teaId="+teaId+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
+
+
+
 /***********************************************This block is for rechoose.jsp*************************************/
 function reChoose(){
 	var xmlhttp;

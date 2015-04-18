@@ -352,7 +352,6 @@ function pushWork(str){
 			I = parseInt(I);
 			var J = str.value.split('_')[1];
 			J = parseInt(J);
-			alert( I*T+J);
 			document.getElementById("fileNo").value = I*T+J;
 			document.getElementById("form1").submit();
 		}

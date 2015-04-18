@@ -59,3 +59,114 @@ $(function() {
 		addTab(title, href);
 	});
 });
+
+
+function check_whether_choose_time(){
+	drawTimeTable();
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='notYet'){
+				$.messager.confirm('重要提示', '为了您的选课时间不与其他课程冲突，您必须设置您的可用选课时间方可继续操作！', function(r){
+					if(r){
+						$('#dialog2').window('open');
+					}
+					else{
+						window.location.href='../login.jsp';
+					}
+				});
+			}		
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/getFirstLoginInfo.jsp?id="+SESSION_ID+"&p="+Math.random(),true);
+	xmlhttp.send();
+	
+	
+}
+
+
+function drawTimeTable(){
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			var len = flag.split('@').length-1;
+			var table,row,col1,col2,span;
+			table=document.getElementById('opTable');
+			for(var i=0 ; i<len ; i++){
+				row = document.createElement('tr');
+				row.align = 'center';
+				table.appendChild(row);
+				col1 = document.createElement('td');
+				col2 = document.createElement('td');			
+				row.appendChild(col1);
+				row.appendChild(col2);
+				
+				//===col1
+				span = document.createElement('span');
+				span.id='spanNo'+i;
+				span.innerHTML = '第'+flag.split('@')[i]+'周';
+				span.value = flag.split('@')[i];
+				col1.appendChild(span);
+				
+				//===col2
+				span = document.createElement('input');
+				span.type='checkbox';
+				span.id = 'check'+ i ;
+				span.value = i ;
+				col2.appendChild(span);
+			}
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/getConfigTime.jsp?p="+Math.random(),true);
+	xmlhttp.send();
+}
+
+
+function save_time(){
+	var time = '' ;
+	for(var i=0 ; i<10 ; i++){
+		if(document.getElementById('check'+i)){
+			if(document.getElementById('check'+i).checked==true){
+				time = time + document.getElementById('spanNo'+i).value+'@';
+			}
+		}
+		else
+			break;
+	}
+	if(time=='') time = 'NOHAVE';
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='success'){
+				alert('时间信息录入成功，你可以选择实验啦');
+				window.location.reload();
+			}
+			else
+				alert('系统错误，请稍后重试');
+			
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/updateFirstLoginTimeRecord.jsp?id="+SESSION_ID+"&time="+time+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
