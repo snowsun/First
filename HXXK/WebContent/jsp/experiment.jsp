@@ -42,6 +42,9 @@
 					<td>
 						人数限制
 					</td>
+					<td>
+						期数设置
+					</td>
 				</tr>
 			</table>	
 		</center><br>管理员可以通过点击实验名称，添加、修改实验说明！
@@ -113,6 +116,8 @@
 		
 		<!-- BUFFER FOR MARK -->
 		<span id="hidden_id" style="display:none;"></span>
+		
+		<span id="hidden_t" style="display:none;"></span>
 	
 	</body>
 </html>

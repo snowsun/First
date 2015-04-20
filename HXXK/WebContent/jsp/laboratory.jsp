@@ -13,7 +13,10 @@
 			<div id="btn">
 			<a id="add"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-add'" onClick="add()">增加实验室</a>  
 			<a id="sub"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onClick="remove_laboratory()">删除实验室</a>
+			<a id="change"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onClick="change_laboratory()">修改实验室</a>
 			<a id="save" href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="display:none;" onClick="save_laboratory()">保存实验室</a>
+			<a id="saveEdit" href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" style="display:none;" onClick="save_edit_laboratory()">修改实验室</a>
+
 			</div><br><br>
 			
 			<table border="1" id="table" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
@@ -22,5 +25,7 @@
 		
 		<!-- HIDDEN_SPAN for recording laboratory's number -->
 		<span id="record" style="display:none;"></span>
+		
+		<span id="record_room" style="display:none;"></span>
 	</body>
 </html>

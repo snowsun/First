@@ -186,6 +186,7 @@ function onloading_laboratory(){//实验室信息页面载入加载函数
 			for(var i=0;i<len;i++){
 				row = document.createElement('tr');
 				row.align = 'center';
+				row.id = 'row_id'+i;
 				if(i%2==0)
 					row.style.background='white';
 				else
@@ -203,17 +204,20 @@ function onloading_laboratory(){//实验室信息页面载入加载函数
 				checkbox.type='checkbox';
 				checkbox.id='check_id'+i;
 				checkbox.name='check_name'+i;
-				
+				col0.appendChild(checkbox);
 				//-1-
+				span = document.createElement('span');
+				span.id='span_num'+i;
+				span.innerHTML = i+1;
+				col1.appendChild(span);
+				
 				//-2-创建span记录实验室
 				span = document.createElement('span');
 				span.id='span_id'+i;
 				span.innerHTML = info[i];
-				
-				//add 0、1、2 to the row
-				col0.appendChild(checkbox);
-				col1.appendChild(document.createTextNode(i+1));
 				col2.appendChild(span);
+				
+				
 			}
 	    }
 	};
@@ -329,7 +333,92 @@ function remove_laboratory(){//删除实验室
 	xmlhttp.send();
 
 }
+//============================================
+function change_laboratory(){//修改实验室
 
+	var id;
+	var i=0;
+	for(; i<20 ; i++){
+		id='check_id'+i;
+		if(document.getElementById(id)!=null){
+			if(document.getElementById(id).checked==true)
+				break;
+		}
+	}
+	if(i==20){
+		alert('请先选中要修改的实验室');
+		return;
+	}
+	id='span_id'+i;
+	var ROOM = document.getElementById(id).innerHTML.replace(/^\s*|\s*$/g,"");
+	document.getElementById('record_room').innerHTML = ROOM ; 
+	id = 'row_id'+i;
+	document.getElementById(id).style.background='red';
+
+	$('#add').linkbutton('disable');
+	$('#sub').linkbutton('disable');
+	$('#change').linkbutton('disable');
+	document.getElementById('saveEdit').style.display='';
+
+	
+	var table,row,col0,col1,col2,textField;
+	table=document.getElementById('table');
+	
+	//加入表的第一行题标行
+	row = document.createElement('tr');
+	row.style.background='red';
+	row.align = 'center';
+	table.appendChild(row);
+	col0 = document.createElement('td');
+	col1 = document.createElement('td');
+	col2 = document.createElement('td');
+	row.appendChild(col0);
+	row.appendChild(col1);
+	row.appendChild(col2);
+	
+	textField = document.createElement('input');
+	textField.type='text';
+	textField.id='textField_id';
+	textField.value = ROOM ;
+	var save = document.getElementById('saveEdit');
+	col0.appendChild(save);
+	col1.appendChild(document.createTextNode(i+1));
+	col2.appendChild(textField);
+
+}
+
+//==============================
+function save_edit_laboratory(){
+	var before = document.getElementById('record_room').innerHTML.replace(/^\s*|\s*$/g,"");
+	var ROOM = document.getElementById('textField_id').value.replace(/^\s*|\s*$/g,"");
+	ROOM = encodeURI(encodeURI(ROOM));
+	before = encodeURI(encodeURI(before));
+	if(ROOM.length==0){
+		alert('请输入实验室房间号');
+		return;
+	}
+	
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='success')
+				window.location.reload(true);
+			else if(flag=='alreadyExist')
+				alert('此房间已存在，请检查是否重复');
+			else
+				alert('数据库存储失败，请刷新后重试');
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/laboratory/edit_laboratory.jsp?ROOM="+ROOM+"&before="+before+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
 /********************************************This block is for experiment.jsp************************************************/
 function FOR_DISPLAY(str){//USED BY ONLOADING
 	var info = str.split('&');
@@ -345,6 +434,7 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 	for(var i = 0 ; i<len ; i++){
 		info_col = info[i].split('#');
 		row = document.createElement('tr');
+		row.id = 'row'+i;
 		row.align = 'center';
 		if(i%2==1)
 			row.style.background='lightblue';
@@ -424,6 +514,105 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		col8.appendChild(span);
 	}	
 }
+
+//====================================================================
+function FOR_SPECIAL_DISPLAY(){
+	var row,col,checkbox;
+	var len=0;
+	var courseId ='';
+	for( ; len<20 ; len++){
+		if(document.getElementById('spanNo'+len)){
+			courseId = courseId + document.getElementById('spanNo'+len).innerHTML.replace(/^\s*|\s*$/g,"")+'-';
+		}
+		else
+			break;
+	}
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			/*构造显示*/
+			if(flag=='failed'){
+				alert('数据库操作失败，请稍后再试，若此问题持续存在请联系数据库管理员');
+			}
+			else{
+				var t = flag.split('*')[0];
+				var sp = flag.split('*')[1].split('-');
+				t = parseInt(t);
+				document.getElementById('hidden_t').innerHTML = t ;
+				for(var i=0 ; i<len ; i++){
+					row = document.getElementById('row'+i);
+					col = document.createElement('td');	
+					row.appendChild(col);
+					for(var n=0 ; n<t ; n++){
+						
+						//col-0
+						checkbox = document.createElement('input');
+						checkbox.type='checkbox';
+						checkbox.id='checkbox'+i+'_'+n;
+						if(sp[i].indexOf(n)<0){
+							checkbox.checked='checked';
+						}
+						col.appendChild(checkbox);						
+					}
+					var a = document.createElement('a');
+					a.href='javascript:void(0)';
+					a.innerHTML = '设置';
+					a.id = 'set'+i;
+					a.value = i ; 
+					a.onclick= function(){upSet(this.value);};
+					col.appendChild(a);					
+				}
+				
+			}
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/experiment/get_t_and_special_info.jsp?courseId="+courseId+"&p="+Math.random(),true);
+	xmlhttp.send();
+	
+	
+}
+//====================================================================
+function upSet(str){
+	var courseId = document.getElementById('spanNo'+str).innerHTML.replace(/^\s*|\s*$/g,"");
+	var t = document.getElementById('hidden_t').innerHTML.replace(/^\s*|\s*$/g,"");
+	t = parseInt(t);
+	var sp = 'MY';
+	for(var i=0 ; i<t ; i++){
+		if(!document.getElementById('checkbox'+str+'_'+i).checked)
+			sp = sp+i;
+	}
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			/*构造显示*/
+			if(flag=='failed'){
+				alert('数据库操作失败，请稍后再试，若此问题持续存在请联系数据库管理员');
+			}
+			else{
+				alert('单独设置课程期数成功！');
+				window.location.reload();
+			}
+			
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/experiment/update_NPublished.jsp?courseId="+courseId+"&sp="+sp+"&p="+Math.random(),true);
+	xmlhttp.send();
+	
+}
 //====================================================================
 function initial(str){
 	var obj; 
@@ -474,7 +663,9 @@ function onloading_experiment(){//页面载入加载函数;
 			else{
 				
 				FOR_DISPLAY(flag);
+				FOR_SPECIAL_DISPLAY();
 				initial(flag.split('&$')[1]);
+				
 			}
 	    }
 	};
