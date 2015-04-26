@@ -10,6 +10,17 @@
 	else{
 		String RETURN = "";
 		RETURN = info[2];
-		out.write(RETURN);
+		String timeInfo[] = new DB_noticeInfo().getNoticeTimeInfo();
+		if(timeInfo[0].equals("failed"))
+			out.write("failed");
+		else{
+			String time = "";
+			for(int i=0 ; !timeInfo[i].equals("over");i++){
+				time = time+timeInfo[i]+"*";
+			}
+			
+			out.write(RETURN+"#"+time);
+		}
+		
 	}
 %>

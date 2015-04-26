@@ -12,7 +12,10 @@
 			<div id="btn">
 			<a id="add"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-add'" onClick="add_experiment()">增加实验</a>  
 			<a id="sub"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onClick="remove_experiment()">删除实验</a>
+			<a id="edit"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onClick="edit_experiment()">修改实验</a>
 			<a id="save" href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="display:none;" onClick="save_experiment()">保存</a>
+			<a id="upEdit" href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" style="display:none;" onClick="upEdit_experiment()">修改</a>
+
 			</div><br>
 			<table border="1" id="table" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
 				<tr align="center" style="background:Silver;">
@@ -84,7 +87,6 @@
 		<!-- 状态-->
 		<select id="_STATUS_"  name="dept" style="width:100%;display:none;">  
 			<option value="1">开放</option>
-			<option value="2">不开放</option>
 		</select>
 		<!-- 人数限制-->
 		<select id="_LIMIT_"  name="dept" style="width:100%;display:none;">  

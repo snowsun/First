@@ -47,6 +47,73 @@ public class DB_noticeInfo {
 			return info;
 		}
 	}
+	// 获得当前公告信息
+		public String getNoticeByTime(String time) {
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet res = null;
+			String result="";
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				ex.printStackTrace();
+			}
+
+			String sql = "select info from notice where time='"+time+"'";
+			try {
+				res = stmt.executeQuery(sql);
+				if (res.next()) {
+					result = res.getString(1).trim();
+				} 
+				con.close();
+				stmt.close();
+				return result;
+
+			} catch (SQLException e) {
+				return "failed";
+			}
+		}
+	// 获得当前公告信息
+		public String[] getNoticeTimeInfo() {
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet res = null;
+			String info[] = new String[100];
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
+				stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			} catch (Exception ex) {
+				System.out.println("连接失败");
+				ex.printStackTrace();
+			}
+
+			String sql = "select time from notice order by time desc";
+			try {
+				res = stmt.executeQuery(sql);
+				int i =  0 ; 
+				while(res.next()) {
+					info[i] = res.getString(1).trim();
+					i++;
+				} 
+				if(i==0)
+					info[0] = "my";
+				else
+					info[i] = "over";
+				
+				con.close();
+				stmt.close();
+				return info;
+
+			} catch (SQLException e) {
+				
+				info[0] = "failed";
+				return info;
+			}
+		}
 
 	// 发布新公告
 	public boolean updateNoticeInfo(String noticeInfo) {
@@ -65,7 +132,6 @@ public class DB_noticeInfo {
 		}
 
 		String sql = "insert into notice values('" + myDateFormat + "','" + noticeInfo + "')";
-		System.out.println(sql);
 		try {
 			stmt.executeUpdate(sql);
 			con.close();
@@ -73,6 +139,31 @@ public class DB_noticeInfo {
 			isSuccess = true; // 更新成功
 		} catch (SQLException e) {
 			e.printStackTrace();
+			isSuccess = false;
+		}
+		return isSuccess;
+	}
+	
+	public boolean deleteNoticeInfo(String time) {
+		boolean isSuccess = false;
+		Connection con = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		} catch (Exception ex) {
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+
+		String sql = "delete from  notice where time='"+time+"'";
+		try {
+			stmt.executeUpdate(sql);
+			con.close();
+			stmt.close();
+			isSuccess = true; // 更新成功
+		} catch (SQLException e) {
 			isSuccess = false;
 		}
 		return isSuccess;

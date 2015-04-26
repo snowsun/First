@@ -821,8 +821,179 @@ function remove_experiment(){//删除实验
 	xmlhttp.open("GET","../server/admin/experiment/delete_experiment.jsp?no="+no+"&p="+Math.random(),true);
 	xmlhttp.send();
 }
+//===================================================================
+function edit_experiment(){
+	var id;
+	var i=0;
+	for(; i<20 ; i++){
+		id='checkbox'+i;
+		if(document.getElementById(id)!=null){
+			if(document.getElementById(id).checked==true)
+				break;
+		}
+	}
+	if(i==20){
+		alert('请先选中要修改的实验');
+		return;
+	}
+	id='spanNo'+i;
+	document.getElementById('hidden_id').innerHTML=document.getElementById(id).innerHTML;
+	var name = document.getElementById('spanName'+i).innerHTML;
+	var lab = document.getElementById('spanLaboratory'+i).innerHTML;
+	var teacher = document.getElementById('spanTeacher'+i).innerHTML;
+	var time = document.getElementById('spanTime'+i).innerHTML;
+	var limit = document.getElementById('spanLimit'+i).innerHTML;
+
+	
+	//
+	$('#add').linkbutton('disable');
+	$('#sub').linkbutton('disable');
+	$('#edit').linkbutton('disable');
+	
+	var table,row,col0,col1,col2,col3,col4,col5,col6,col7,col8;
+	table=document.getElementById('table');
+	var rowB = document.getElementById('row'+i);
+	rowB.style.background='darkgray';
+	
+	row = document.createElement('tr');
+	row.align = 'center';
+	row.style.background='darkgray';
+	table.appendChild(row);
+	
+	col0 = document.createElement('td');
+	col1 = document.createElement('td');
+	col2 = document.createElement('td');
+	col3 = document.createElement('td');
+	col4 = document.createElement('td');
+	col5 = document.createElement('td');
+	col6 = document.createElement('td');
+	col7 = document.createElement('td');
+	col8 = document.createElement('td');
+	
+	row.appendChild(col0);
+	row.appendChild(col1);
+	row.appendChild(col2);
+	row.appendChild(col3);
+	row.appendChild(col4);
+	row.appendChild(col5);
+	row.appendChild(col6);
+	row.appendChild(col7);
+	row.appendChild(col8);
+	
+	var obj ; 
+	obj = document.getElementById('_TEACHER_');
+	for(var i=0 ; i<200 ; i++){
+		if(teacher == obj.options[i].text.replace(/^\s*|\s*$/g,"")){
+			break;
+		}
+	}
+	obj.options[i].selected = true;
+	
+	obj = document.getElementById('_LABORATORY_');
+	for(var i=0 ; i<200 ; i++){
+		if(lab == obj.options[i].text.replace(/^\s*|\s*$/g,"")){
+			break;
+		}
+	}
+	obj.options[i].selected = true;
+	
+	obj = document.getElementById('_TIME_');
+	for(var i=0 ; i<200 ; i++){
+		if(time == obj.options[i].text.replace(/^\s*|\s*$/g,"")){
+			break;
+		}
+	}
+	obj.options[i].selected = true;
+	
+	obj = document.getElementById('_LIMIT_');
+	for(var i=0 ; i<200 ; i++){
+		if(limit == obj.options[i].text.replace(/^\s*|\s*$/g,"")){
+			break;
+		}
+	}
+	obj.options[i].selected = true;
+	
+	document.getElementById("upEdit").style.display='';
+	document.getElementById("_NAME_").style.display='';
+	document.getElementById("_NAME_").value=name;
+	document.getElementById("_TURNAL_").style.display='';
+	document.getElementById("_LABORATORY_").style.display='';
+	document.getElementById("_TEACHER_").style.display='';
+	document.getElementById("_TIME_").style.display='';
+	document.getElementById("_STATUS_").style.display='';
+	document.getElementById("_LIMIT_").style.display='';
+	
+	col0.appendChild(document.getElementById("upEdit"));
+	col2.appendChild(document.getElementById("_NAME_"));
+	col3.appendChild(document.getElementById("_TURNAL_"));
+	col4.appendChild(document.getElementById("_LABORATORY_"));
+	col5.appendChild(document.getElementById("_TEACHER_"));
+	col6.appendChild(document.getElementById("_TIME_"));
+	col7.appendChild(document.getElementById("_STATUS_"));
+	col8.appendChild(document.getElementById("_LIMIT_"));
+}
 
 //====================================================================
+function upEdit_experiment(){
+	var id , name,turnal,laboratory,teacher,time,status,limit;
+	var obj,index; 
+	id = document.getElementById('hidden_id').innerHTML.replace(/^\s*|\s*$/g,""); 
+	
+	obj=document.getElementById("_NO_");
+	index=obj.selectedIndex;
+	
+	name = document.getElementById("_NAME_").value.replace(/^\s*|\s*$/g,""); 
+	name =  encodeURI(encodeURI(name));
+	
+	turnal = document.getElementById("_TURNAL_").innerHTML.replace(/^\s*|\s*$/g,"");
+	
+	obj=document.getElementById("_LABORATORY_");
+	index=obj.selectedIndex;
+	laboratory = obj.options[index].text.replace(/^\s*|\s*$/g,""); 
+	laboratory =  encodeURI(encodeURI(laboratory));
+	
+	obj=document.getElementById("_TEACHER_");
+	index=obj.selectedIndex;
+	teacher = obj.options[index].text.replace(/^\s*|\s*$/g,""); 
+	teacher =  encodeURI(encodeURI(teacher));
+	
+	obj=document.getElementById("_TIME_");
+	index=obj.selectedIndex;
+	time = obj.options[index].text.replace(/^\s*|\s*$/g,""); 
+	time =  encodeURI(encodeURI(time));
+	
+	obj=document.getElementById("_STATUS_");
+	index=obj.selectedIndex;
+	status = obj.options[index].text.replace(/^\s*|\s*$/g,""); 
+	if(status=='开放')
+		status='1';
+	else
+		status='0';
+	
+	obj=document.getElementById("_LIMIT_");
+	index=obj.selectedIndex;
+	limit = obj.options[index].text.replace(/^\s*|\s*$/g,""); 
+
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='success')
+				window.location.reload(true);
+			else
+				alert('数据库存储失败，请刷新后重试');
+	    }
+	};
+	xmlhttp.open("GET","../server/admin/experiment/edit_experiment.jsp?name="+name+"&id="+id+"&turnal="+turnal+"&laboratory="+laboratory+"&teacher="+teacher+"&time="+time+"&status="+status+"&limit="+limit+"&p="+Math.random(),true);
+	xmlhttp.send();
+}
+//==================================
 function checkClicked(str){//点击课程名称弹出备注修改框，触发
 	str = str.split('spanName')[1];
 	var no;
