@@ -110,7 +110,7 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 			
 			check = document.createElement('input');
 			check.type='checkbox';
-			check.id = 'check_stu'+i+'_'+j;
+			check.id = 'check_stu'+i+'_'+j;     //Mark
 			check.onclick= function(){checkClicked();};
 			
 			__COLCHECK__ = document.createElement('td');
@@ -180,6 +180,61 @@ function hideCheckBox(){
 	xmlhttp.send();
 }
 //====================================================================
+function hide_free_checkbox(){
+	var xmlhttp;
+	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+			if(flag=='failed')
+				alert('数据库访问失败，请稍后再次进行访问！');
+			else{
+				var group = flag.split('#');
+				for(var i=0 ; i<20 ; i++){
+					if(document.getElementById('spanNo'+i)){
+						var id1 = document.getElementById('spanNo'+i).innerHTML;
+						var f = inArray(id1 , group);
+						if(f!=-1){
+							if(f!='MY'){
+								for(var j=0 ; j<5 ; j++){
+									if(f.indexOf(j)>0){
+										var id2 = 'check_stu'+i+'_'+(j+1);
+										if(document.getElementById(id2)){
+											document.getElementById(id2).disabled=true;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+	    }
+	};
+	xmlhttp.open("GET","../../server/student/courseChoose/fetch_cannotTurns.jsp?p="+Math.random(),true);
+	xmlhttp.send();
+}
+//====================================================================
+//****
+function inArray( str ,  array){
+	for(var i=0 ; i<array.length-1 ; i++){
+		if(array[i].split('-')[0] == str){
+			return array[i].split('-')[1];
+		}
+	}
+	
+	return -1;
+}
+
+//****
+
+//===================================================================
+
 function onloading_courseChoose(){//页面载入加载函数;
 	var xmlhttp;
 	if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -197,6 +252,7 @@ function onloading_courseChoose(){//页面载入加载函数;
 				/*构造显示*/
 				FOR_DISPLAY(flag);
 				hideCheckBox();
+				hide_free_checkbox();
 			}
 	    }
 	};

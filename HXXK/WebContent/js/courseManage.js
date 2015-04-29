@@ -734,6 +734,12 @@ function save_experiment(){//保存新添加的实验课程
 	index=obj.selectedIndex;
 	
 	name = document.getElementById("_NAME_").value.replace(/^\s*|\s*$/g,""); 
+	if(name.indexOf('!')>0 || name.indexOf('@')>0 || name.indexOf('#')>0 || name.indexOf('$')>0 || name.indexOf('%')>0
+			|| name.indexOf('^')>0 || name.indexOf('&')>0 || name.indexOf('*')>0 || name.indexOf('-')>0 || name.indexOf('_')>0
+			|| name.indexOf('+')>0 || name.indexOf('=')>0 || name.indexOf('~')>0){
+		alert('实验名称中不允许出现特殊字符！');
+		return;
+	}
 	name =  encodeURI(encodeURI(name));
 	
 	turnal = document.getElementById("_TURNAL_").innerHTML.replace(/^\s*|\s*$/g,"");

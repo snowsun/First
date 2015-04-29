@@ -3,6 +3,7 @@
 <%	
 	String cId = request.getParameter("courseId").toString();
 	String sp = request.getParameter("sp").toString();
+	System.out.println(sp);
 	if(new DB_NPublished().insert_NPublished(cId, sp)==1)
 		out.write("success");
 	else

@@ -25,7 +25,7 @@ public class DB_NPublished {
 		try {
 			res= stmt.executeQuery(sql);
 			if(res.next()){
-				sql = "update NPublished set noPublished='"+NP+"'";
+				sql = "update NPublished set noPublished='"+NP+"' where id='"+id+"'";
 				stmt.executeUpdate(sql);
 			}
 			else{
@@ -66,7 +66,7 @@ public class DB_NPublished {
 		try {
 			res= stmt.executeQuery(sql);
 			int i = 0 ;
-			if(res.next()){			
+			while(res.next()){			
 					result[i][0]= res.getString(1).trim();
 					result[i][1]= res.getString(2).trim();
 					i++;

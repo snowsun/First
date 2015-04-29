@@ -59,6 +59,9 @@
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/checkChoose.jsp" class="cs-navi-tab">
   					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">选课情况查看</button>
   				</a><br>
+  				<a href="javascript:void(0)"  src="<%=basePath%>jsp/schedule.jsp" class="cs-navi-tab">
+  					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgreen;">当天总课程表</button>
+  				</a><br>
 			</div>
 			<div title="用户管理" >
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/studentInfo.jsp" class="cs-navi-tab">
