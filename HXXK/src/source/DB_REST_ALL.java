@@ -39,6 +39,8 @@ public class DB_REST_ALL {
 			stmt.executeUpdate(sql);
 			sql = "delete  from FirstLoginTimeRecord";
 			stmt.executeUpdate(sql);
+			sql = "delete  from NPublished";
+			stmt.executeUpdate(sql);
 			con.close();
 			stmt.close();
 			return "success";

@@ -99,4 +99,33 @@ public class DB_FirstLoginTimeRecord {
 		}	
 		
 	}
+	
+	/***插入时间记录于表中***///=====================================================================
+	public boolean reset_by_id(String id){
+		Connection con=null;
+		Statement stmt=null;
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK",DBUserName,DBPassword);
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);	  
+		}
+		catch(Exception ex)
+		{
+			System.out.println("连接失败");
+			ex.printStackTrace();
+		}
+		
+		String sql = "delete  from FirstLoginTimeRecord where id='"+id+"'";
+		try {
+			stmt.executeUpdate(sql);
+			con.close();
+			stmt.close();	
+			return true; //更新成功
+		} catch (SQLException e) {
+			//return -1; //数据库操作失败
+			return false;
+		}	
+		
+	}
 }
