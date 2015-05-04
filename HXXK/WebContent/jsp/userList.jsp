@@ -52,14 +52,50 @@
 				</tr>
 			</table>	
 			<hr />
-			<a id="yes"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-back'" onClick="reChoose()">返回学生信息</a>
+			<a id="yes"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-back'" onClick="window.location.reload(true)">返回学生信息</a>
 			<a id="yes"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onClick="reChoose()">重置该生选课</a>  
 		</center>
 		
 </div>
 
 <div id="div3" style="display:none;">
-	
+	<center>
+			<table border="1" id="table3" style="color:DimGray;border-style:Solid;font-style:normal;text-decoration:none;width:100%;border-collapse:collapse;">
+				<tr id='title' align="center" style="background:Silver;">
+					<td>
+						编号
+					</td>
+					<td>
+						实验名称
+					</td>
+					<td>
+						周期
+					</td>
+					<td>
+						实验室
+					</td>
+					<td>
+						教师
+					</td>
+					<td>
+						实验时间
+					</td>
+					<td>
+						状态
+					</td>
+					<td>
+						人数限制
+					</td>
+				</tr>
+			</table>	
+			<hr/>
+			<a id="re"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-reload'"  onClick="rech()">重新选课</a>  
+			<a id="ok"  href="javascript:void(0)"  class="easyui-linkbutton" data-options="iconCls:'icon-ok'"      onClick="submit()">提交选课信息</a>  
+		</center>
+		<span id="_NUM_" style="display:none;"></span>
+		<span id="_ROWS_" style="display:none;"></span>
+		<span id="hidden_id" style="display:none;"></span>
+		<span id="hidden_num" style="display:none;"></span>
 </div>
 </body>
 </html>

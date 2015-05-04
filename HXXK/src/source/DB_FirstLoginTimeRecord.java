@@ -71,7 +71,7 @@ public class DB_FirstLoginTimeRecord {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet res = null;
-		String cannotTime="failed";
+		String cannotTime="NOHAVE";
 		try
 		{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -95,7 +95,7 @@ public class DB_FirstLoginTimeRecord {
 			return cannotTime; //更新成功
 		} catch (SQLException e) {
 			//return -1; //数据库操作失败
-			return cannotTime;
+			return "failed";
 		}	
 		
 	}
