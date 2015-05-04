@@ -53,9 +53,9 @@
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/experiment.jsp" class="cs-navi-tab">
   					<button class="cs-link" title="点击可以打开或刷新页面">3.实验信息设置</button>
   				</a><br>
-  				<a href="javascript:void(0)" title="cfs" src="<%=basePath%>jsp/chooseForStu.jsp" class="cs-navi-tab">
-  					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">手动为学生选课</button>
-  				</a><br>
+<%--   				<a href="javascript:void(0)" title="cfs" src="<%=basePath%>jsp/chooseForStu.jsp" class="cs-navi-tab"> --%>
+<!--   					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">手动为学生选课</button> -->
+<!--   				</a><br> -->
   				<a href="javascript:void(0)"  src="<%=basePath%>jsp/checkChoose.jsp" class="cs-navi-tab">
   					<button class="cs-link"   title="点击可以打开或刷新页面" style="background-color:lightgray;">选课情况查看</button>
   				</a><br>

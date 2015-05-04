@@ -74,7 +74,7 @@ function check_whether_choose_time(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
 			if(flag=='notYet'){
-				$.messager.confirm('重要提示', '为了您的选课时间不与其他课程冲突，您必须设置您的可用选课时间方可继续操作！', function(r){
+				$.messager.confirm('警告' , '为了您的选课时间不与其他课程冲突，您必须设置您的可用选课时间方可继续操作！',function(r){
 					if(r){
 						$('#dialog2').window('open');
 					}
@@ -82,6 +82,8 @@ function check_whether_choose_time(){
 						window.location.href='../login.jsp';
 					}
 				});
+				$(".panel-tool-close" ).css( "display","none");
+
 			}		
 	    }
 	};
@@ -118,7 +120,7 @@ function drawTimeTable(){
 				//===col1
 				span = document.createElement('span');
 				span.id='spanNo'+i;
-				span.innerHTML = '第'+flag.split('@')[i]+'周';
+				span.innerHTML = '星期'+flag.split('@')[i];
 				span.value = flag.split('@')[i];
 				col1.appendChild(span);
 				

@@ -10,7 +10,14 @@
 		<title>南京大学化学实验教学中心 </title>
 		
 		<script>
-			function Query(){
+			if (document.addEventListener){//如果是Firefox		
+				document.addEventListener("keypress", Query, true);	
+			}
+			else{		
+				document.attachEvent("onkeypress", Query);	
+			}
+			
+			function Query(event){
 				if(event.keyCode==13){
 					document.getElementById("login").click();
 					event.returnValue = false ;
@@ -34,7 +41,7 @@
 					<input type="text" id="username" placeholder="username" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)"/>
 				</div>
 				<div class="password">
-					<input type="password" id="password" placeholder="password" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)" onkeydown="Query();"/>
+					<input type="password" id="password" placeholder="password" style="font-size:20;width:200px;height:30px;background-color:transparent;border:0;background-image:url(image/none.png)"/>
 				</div>
 				<div class="login" id="login" style="cursor:hand; background-image:url(../image/none.png)" onClick="log('0')"></div>
 				<div class="back"  id="back"  style="cursor:hand; background-image:url(../image/none.png)" onClick="back()"></div>

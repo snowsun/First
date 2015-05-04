@@ -81,6 +81,8 @@ function FOR_DISPLAY(str){//USED BY ONLOADING
 		span = document.createElement('span');
 		span.id='spanTeacher'+i;
 		span.innerHTML = info_col[4];
+		span.style.cursor = 'hand';
+		span.onclick= function(){disTeaNotice(this.innerHTML);};
 		col5.appendChild(span);
 		//col-6
 		span = document.createElement('span');

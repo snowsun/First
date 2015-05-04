@@ -77,8 +77,10 @@ function getStu(){
 					//col-5
 					span = document.createElement('a');
 					span.id='dl'+i;
+					span.value = i ;
 					span.href='javascript:void(0)';
 					span.innerHTML = '删除';
+					span.onclick= function(){deleteStu(this.value);};
 					col5.appendChild(span);
 				}
 				
@@ -603,4 +605,33 @@ function rech(){
 	hideCheckBox();
 	hide_free_checkbox();
 	
+}
+
+//=====
+function deleteStu(str){
+	$.messager.confirm('警告确认框', '您正在删除学生，此操作将删除学生一切信息，删除后不可恢复，请谨慎操作！', function(r){
+		if (r){
+			var id = document.getElementById('spanId'+str).innerHTML;
+			var xmlhttp;
+			if(window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}
+			else{// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function(){
+				if (xmlhttp.readyState==4 && xmlhttp.status==200){
+					var flag = xmlhttp.responseText.replace(/^\s*|\s*$/g,"");
+					if(flag=='failed')
+						alert('数据库访问失败，请稍后再次进行访问！');
+					else{
+						alert('学生删除成功！');
+						window.location.reload(true);
+					}
+			    }
+			};
+			xmlhttp.open("GET","../server/admin/stuList/delete.jsp?id="+id+"&p="+Math.random(),true);
+			xmlhttp.send();
+		}
+	});
 }

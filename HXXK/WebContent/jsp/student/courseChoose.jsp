@@ -67,6 +67,12 @@
 		<span id="hidden_id" style="display:none;"></span>
 		
 		
+		<div id="dialog2" class="easyui-dialog" style="width:600px;height:300px" data-options="title:'教师简介',closed:true,modal:true">
+			<div id="teaInfo" class="easyui-panel"  style="width:auto;height:auto;background:#fafafa;margin:0px auto;"   
+                data-options="iconCls:'icon-ok',closable:false,collapsible:true,minimizable:false,maximized:true">   
+            </div>  
+		</div>
+		
 	</body>
 </html>
 
