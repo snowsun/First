@@ -162,7 +162,7 @@ function hideCheckBox(){
 				var len = flag.split('@').length-1;
 				for(var i=0 ; i<len ; i++){
 					var cannotTime='星期'+flag.split('@')[i];
-					for(var j=0 ; j<20 ; j++){
+					for(var j=0 ; j<200 ; j++){
 						if(document.getElementById('spanTime'+j)){
 							if(document.getElementById('spanTime'+j).innerHTML==cannotTime){
 								for(var r=0; r<8 ; r++){
@@ -197,7 +197,7 @@ function hide_free_checkbox(){
 				alert('数据库访问失败，请稍后再次进行访问！');
 			else{
 				var group = flag.split('#');
-				for(var i=0 ; i<20 ; i++){
+				for(var i=0 ; i<200 ; i++){
 					if(document.getElementById('spanNo'+i)){
 						var id1 = document.getElementById('spanNo'+i).innerHTML;
 						var f = inArray(id1 , group);

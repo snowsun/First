@@ -62,7 +62,7 @@
 		<!-- 试验编号 -->
 		<select id="_NO_"  name="dept" style="width:100%;display:none;">   
 			<%
-				for(int i=1;i<=20;i++)
+				for(int i=1;i<=200;i++)
 				{			
 				%>
 					<option value=<%=i-2%>><%=i%></option>

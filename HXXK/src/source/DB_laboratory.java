@@ -14,7 +14,7 @@ public class DB_laboratory {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet res = null;
-		String info[] = new String[20];
+		String info[] = new String[200];
 		try
 		{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

@@ -48,7 +48,7 @@ public class DB_NPublished {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet res = null;
-		String result[][] = new String[20][2];
+		String result[][] = new String[200][2];
 		result[0][0]= "failed";
 		try
 		{

@@ -19,7 +19,7 @@
 		return;
 	}
 	String room="";
-	for(int i = 0 ; i<20 ; i++){
+	for(int i = 0 ; i<200; i++){
 		if(!ROOM[i].equals("over"))
 			room = room+ROOM[i]+"*";
 		else
@@ -32,7 +32,7 @@
 		return;
 	}
  	String teacher="";
- 	for(int i=0;i<50;i++){
+ 	for(int i=0;i<200;i++){
  		if(!TEACHER[i][0].equals("over"))
  			teacher = teacher+TEACHER[i][0]+"-"+TEACHER[i][2]+"*";
  		else
@@ -48,7 +48,7 @@
 	}
 	else{
 		String RETURN="",temp="";
-		for(int i=0;i<50;i++){
+		for(int i=0;i<200;i++){
 			if(info[i][0].equals("over"))
 				break;
 			else{

@@ -22,7 +22,7 @@
 				String C[] = courses.split("\\*");
 				int len = C.length;
 				String RETURN="",temp="";
-				for(int i=0;i<50;i++){
+				for(int i=0;i<200;i++){
 					if(info[i][0].equals("over"))
 						break;
 					else{

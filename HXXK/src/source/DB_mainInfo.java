@@ -74,7 +74,7 @@ public class DB_mainInfo {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet res = null;
-		String info[][] = new String[50][13];
+		String info[][] = new String[200][13];
 		try
 		{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -126,7 +126,7 @@ public class DB_mainInfo {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet res = null;
-		String info[][] = new String[50][18];
+		String info[][] = new String[200][18];
 		try
 		{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

@@ -299,14 +299,14 @@ function remove_laboratory(){//删除实验室
 
 	var id;
 	var i=0;
-	for(; i<20 ; i++){
+	for(; i<200 ; i++){
 		id='check_id'+i;
 		if(document.getElementById(id)!=null){
 			if(document.getElementById(id).checked==true)
 				break;
 		}
 	}
-	if(i==20){
+	if(i==200){
 		alert('请先选中要删除的实验室');
 		return;
 	}
@@ -338,14 +338,14 @@ function change_laboratory(){//修改实验室
 
 	var id;
 	var i=0;
-	for(; i<20 ; i++){
+	for(; i<200 ; i++){
 		id='check_id'+i;
 		if(document.getElementById(id)!=null){
 			if(document.getElementById(id).checked==true)
 				break;
 		}
 	}
-	if(i==20){
+	if(i==200){
 		alert('请先选中要修改的实验室');
 		return;
 	}
@@ -520,7 +520,7 @@ function FOR_SPECIAL_DISPLAY(){
 	var row,col,checkbox;
 	var len=0;
 	var courseId ='';
-	for( ; len<20 ; len++){
+	for( ; len<200 ; len++){
 		if(document.getElementById('spanNo'+len)){
 			courseId = courseId + document.getElementById('spanNo'+len).innerHTML.replace(/^\s*|\s*$/g,"")+'-';
 		}
@@ -795,14 +795,14 @@ function save_experiment(){//保存新添加的实验课程
 function remove_experiment(){//删除实验
 	var id;
 	var i=0;
-	for(; i<20 ; i++){
+	for(; i<200 ; i++){
 		id='checkbox'+i;
 		if(document.getElementById(id)!=null){
 			if(document.getElementById(id).checked==true)
 				break;
 		}
 	}
-	if(i==20){
+	if(i==200){
 		alert('请先选中要删除的实验');
 		return;
 	}
@@ -831,14 +831,14 @@ function remove_experiment(){//删除实验
 function edit_experiment(){
 	var id;
 	var i=0;
-	for(; i<20 ; i++){
+	for(; i<200 ; i++){
 		id='checkbox'+i;
 		if(document.getElementById(id)!=null){
 			if(document.getElementById(id).checked==true)
 				break;
 		}
 	}
-	if(i==20){
+	if(i==200){
 		alert('请先选中要修改的实验');
 		return;
 	}

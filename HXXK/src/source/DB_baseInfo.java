@@ -171,7 +171,7 @@ public class DB_baseInfo {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet res = null;
-		String info[][] = new String[50][5];
+		String info[][] = new String[200][5];
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=HXXK", DBUserName, DBPassword);
